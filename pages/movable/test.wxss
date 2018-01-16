@@ -1,0 +1,23 @@
+.moveable-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: red;
+}
+.movable-wrapper {
+  min-height: 100px;
+  background: #ddd;
+  flex: 1;
+}
+.movable-item {
+  height: 100px;
+  width:  140%;
+  background: blue;
+  flex: 1;
+}
+.move-able-delete-section {
+  width: 60px;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+}

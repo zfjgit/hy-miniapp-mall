@@ -1,0 +1,71 @@
+<view class="container">
+  <view class='view-edit class-title'>
+    <view class='view-edit-title'>购物车</view>
+    <view class='view-edit-button' bindtap="{{ mode == mode_edit ? 'editConfirmTap': 'editTap' }}">
+      {{mode == mode_edit ? '完成': '编辑'}}
+    </view>
+  </view>
+  
+  <view class='view-cart-products {{products.length > 0 ? "" : "class-hide"}}'>
+    <scroll-view class='view-cart-products-scroll' scroll-y>
+      <view class="view-cart-product" wx:for="{{products}}" wx:key="item" data-idx="{{index}}"
+        bindtouchstart="onTouchStart" 
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+        bindtouchcancel="onTouchEnd"
+        bindlongpress='onLongPress'
+        >
+        <movable-area class="view-cart-product-movable-area">
+          <movable-view class='view-cart-product-movable-view' out-of-bounds="true" direction="horizontal" x="{{item.moveX ? item.moveX : 0}}" 
+            friction='10' damping='50'>
+
+            <view data-idx="{{index}}" class='view-cart-select' bindtap='selectTap'>
+              <icon type="success" size="20" 
+                color='{{ mode == mode_buy ? (item.isBuySelected == flag_yes ? "red" : "#ccc") : (item.isEditSelected == flag_yes ? "red" : "#ccc") }}'/>
+            </view>
+            <navigator url='/pages/product/product?id={{item.id}}'>
+              <image class='view-cart-product-img' src='{{item.img}}' mode='aspectFill'></image>
+            </navigator>
+            <view class="view-cart-product-detail">
+              <navigator url='/pages/product/product?id={{item.id}}'>
+                <view class='view-cart-product-detail-name'>{{item.name}}</view>
+              </navigator>
+              <view class='view-cart-product-detail-sku'></view>
+              <view class='view-cart-product-detail-pricenumbers'>
+                <view class='view-cart-product-detail-price'>￥<text class='view-cart-product-detail-price-number'>{{item.price}}</text></view>
+                <view class='view-cart-product-detail-numbers {{ mode == mode_buy ? "" : "class-invisible" }}'>
+                  <view data-idx="{{index}}" class='view-cart-product-detail-numbers-dec' bindtap='productNumberDecTap'>-</view>
+                  <view class='view-cart-product-detail-number'>{{item.number}}</view>
+                  <view data-idx="{{index}}" class='view-cart-product-detail-numbers-inc' bindtap='productNumberIncTap'>+</view>
+                </view>
+              </view>
+            </view>
+
+          </movable-view>
+        </movable-area>
+        <view data-idx='{{index}}' class="move-able-delete-section" bindtap='onSingleDelete'>删除</view>
+
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="view-cart-empty-tips {{products.length > 0 ? 'class-hide' : ''}}">
+    购物车空空如也，快去挑选您喜欢的商品吧 ^.^
+  </view>
+
+  <view class='view-cart-bottom class-title'>
+    <view class='view-cart-bottom-selectall' bindtap='selectAllTap'>
+      <icon class='view-cart-bottom-selectall-icon' type="success" size="20" 
+        color='{{ mode == mode_buy ? (isBuySelectedAll == flag_yes ? "red" : "#ccc") : (isEditSelectedAll == flag_yes ? "red" : "#ccc") }}'/>
+      <text class='view-cart-bottom-selectall-text'>全选</text>
+    </view>
+    <view class="view-cart-bottom-total {{ mode == mode_edit ? 'class-invisible': ''}}">
+      合计：￥<text class='view-cart-bottom-total-number'>{{total}}</text>
+    </view>
+    <view 
+      class='view-cart-bottom-buy  {{ mode == mode_buy ? ( buySelectedCount > 0 ? "buy-enabled" : "") : (editSelectedCount > 0 ? "edit-enabled" : "")}}' 
+                          bindtap='{{ mode == mode_buy ? ( buySelectedCount > 0 ? "buyTap" : "") : (editSelectedCount > 0 ? "deleteTap" : "")}}'>
+        {{mode == mode_buy ? "去结算" : "删除" }}
+    </view>
+  </view>
+</view>

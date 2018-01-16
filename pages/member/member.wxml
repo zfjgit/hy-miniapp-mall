@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="view-head">
+    <view class='view-head-view'>
+      <image class='view-head-img' src='{{customer.headimg == "" ? defaultHeadImg : customer.headimg }}' mode='aspectFill'></image>
+    </view>
+    <view class='view-head-name'>
+      {{customer.name}}
+    </view>
+  </view>
+
+  <view class='view-main'>
+    <view class='view-main-balance'>
+      <view class='view-balance'>余额￥：<text class='view-balance-number'>{{customer.balance}}</text></view>
+      <view class='view-score'>积分：<text class='view-score-number'>{{customer.score}}</text></view>
+      <view class='view-coupons'>优惠券：<text class='view-coupons-number'>{{customer.coupons}}</text></view>
+    </view>
+    <navigator class='view-item' url='/pages/order/order'>
+      <image class='view-item-icon' src="/images/nav/order-on.png" mode='aspectFit'></image>
+      <view class='view-item-title'>我的订单</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </navigator>
+    <navigator class='view-item' url='/pages/addr/addr'>
+      <image class='view-item-icon' src="/images/ico-addr.png" mode='aspectFit'></image>
+      <view class='view-item-title'>收货地址</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </navigator>
+    <navigator class='view-item' url='/pages/coupon/coupon'>
+      <image class='view-item-icon' src="/images/gou-red.png" mode='aspectFit'></image>
+      <view class='view-item-title'>优惠券</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </navigator>
+    <navigator class='view-item' url='/pages/aboutus/aboutus'>
+      <image class='view-item-icon' src="/images/nav/my-off.png" mode='aspectFit'></image>
+      <view class='view-item-title'>关于我们</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </navigator>
+    
+  </view>
+</view>

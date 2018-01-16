@@ -1,0 +1,218 @@
+.view-order-status{
+  width: 95%;
+  padding: 20rpx;
+  height: 100rpx;
+  min-height: 100rpx;
+  line-height: 100rpx;
+  color: white;
+  background-color: #FD6D17;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.view-order-status-name {
+  font-size: 40rpx;
+}
+.view-order-status-img {
+  width: 70rpx;
+  height: 70rpx;
+}
+.view-order-logistics {
+  width: 95%;
+  display: flex;
+  padding: 20rpx;
+  height: 80rpx;
+  min-height: 80rpx;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+.view-order-logistics-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0 10rpx;
+}
+.view-order-logistics-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.view-order-receiver {
+  width: 95%;
+  background-color: white;
+  display: flex;
+  padding: 20rpx;
+  height: auto;
+  min-height: 80rpx;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: solid 1rpx #eee;
+}
+.view-order-receiver-detail {
+  width: 85%;
+}
+.view-order-receiver-name {
+  width: 100%;
+}
+.view-order-receiver-addr {
+  width: 100%;
+}
+
+.view-order-products {
+  width: 95%;
+  padding: 10rpx 20rpx;
+  background-color: white;
+  margin-top: 10rpx;
+}
+.view-order-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 10rpx 0;
+  padding: 10rpx;
+  border-bottom: solid 1rpx #eee;
+}
+.view-order-item-img {
+  width: 200rpx;
+  height: 160rpx;
+}
+.view-order-item-name {
+  margin: 0 10rpx;
+}
+.view-order-item-price {
+  color: red;
+  text-align: center;
+}
+.view-order-total {
+  width: 95%;
+  margin-top: 10rpx;
+  padding: 20rpx;
+  background-color: white;
+}
+.view-order-ship-money {
+  width: 100%;
+  height: 40rpx;
+  padding: 10rpx 0;
+  display: flex;
+  align-items: stretch;
+  justify-content:space-between;
+}
+.view-order-total-money {
+  width: 100%;
+  height: 40rpx;
+  padding: 10rpx 0;
+  display: flex;
+  align-items: stretch;
+  justify-content:space-between;
+}
+.view-order-total-money-text {
+  color: red;
+}
+.view-order-total-money-number {
+  font-size: 35rpx;
+}
+
+.view-order-contact {
+  height: 100rpx;
+  width: 100%;
+  margin-top: 10rpx;
+  padding: 20rpx;
+  background-color: white;
+  text-align: left;
+}
+
+.view-order-contact-button {
+  width: 35%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  background-color: transparent;
+  font-size: 30rpx;
+  border: none;
+}
+
+.view-order-contact-button-img {
+  width: 50rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.view-order-contact-button-title {
+  height:30rpx;
+  line-height:30rpx;
+  margin-left: 10rpx;
+}
+
+.view-order-recommend-products {
+  padding: 20rpx;
+  margin-bottom: 100rpx;
+  background-color: #eee;
+}
+.view-order-recommend-products-title {
+  width: 95%;
+  padding: 20rpx 0;
+  text-align: center;
+  color: #FD6D17;
+  font-size: 35rpx;
+}
+.view-order-recommend-products-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0rpx;
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex-wrap:wrap;
+}
+.view-order-recommend-product {
+  width: 47%;
+  margin: 10rpx;
+  height: auto;
+}
+.view-order-recommend-product-name {
+  max-height: 70rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.view-order-recommend-product-img {
+  width: 100%;
+  height: 320rpx;
+  border: solid 1rpx #eee;
+}
+.view-order-recommend-product-price {
+  color: red;
+}
+.view-order-recommend-product-price-number {
+  font-size: 35rpx;
+}
+
+.view-order-operations {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  margin-top: 10rpx;
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+}
+.view-order-operations-item {
+  padding: 10rpx 20rpx;
+  border:solid 1rpx #eee;
+  border-radius: 30rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin: 0 10rpx;
+}

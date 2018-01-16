@@ -1,0 +1,69 @@
+<view class="container">
+  <view class="view-banner">
+    <swiper class='view-banner-swiper' indicator-active-color='{{bannerSwiper.indicatorActiveColor}}' indicator-dots="{{bannerSwiper.indicatorDots}}" 
+      autoplay="{{bannerSwiper.autoplay}}" interval="{{bannerSwiper.interval}}" duration="{{bannerSwiper.duration}}" 
+      circular="{{bannerSwiper.circular}}">
+      <navigator wx:for="{{bannerSwiper.images}}" wx:key="item" url="/pages/product/product?id={{item.productId}}" open-type="navigate">
+        <swiper-item>
+          <image src="{{item.url}}" class="banner-image" mode="scaleToFill"/>
+        </swiper-item>
+      </navigator>
+    </swiper>
+  </view>
+
+  <view class="view-notice">
+    <view class='view-notice-title'>公告：</view>
+    <swiper class='view-notice-swiper' vertical='true' autoplay='true'>
+      <navigator wx:for="{{noticeSwiper.notices}}" wx:key="item" url="/pages/notice/notice?id={{item.id}}" open-type="navigate">
+        <swiper-item>
+          <view class="view-notice-text">{{item.title}}</view>
+        </swiper-item>
+      </navigator>
+    </swiper>
+  </view>
+
+  <view class='view-category'>
+    <scroll-view class='view-category-scoll' scroll-x >
+      <navigator class="view-category-item" wx:for="{{categoryScroll.categorys}}" wx:key="item" 
+        url="/pages/search/search?type=category&id={{item.id}}"
+        open-type="navigate">
+        <view class='view-category-item-view' >
+          <image class="view-category-image" src="{{item.img}}" mode="scaleToFill"/>
+          <view class="view-category-name">{{item.name}}</view>
+        </view>
+      </navigator>
+    </scroll-view>
+  </view>
+
+  <view class="view-search">
+    <navigator class='view-search-nav' url="/pages/search/search" >
+      <input class="view-search-input" placeholder="搜索您喜欢的商品" placeholder-class='input-placeholder' 
+        confirm-type='search'/>
+      <image class="view-search-button" src='/images/search-pic.png' />
+    </navigator>
+  </view>
+
+  <view class='view-products'>
+    <view class="view-products-categorys" wx:for="{{categoryProducts}}" wx:for-item="item" wx:key="" >
+      <view class="view-products-categorys-title">
+        <text class='view-products-categorys-category-title class-title'>{{item.name}}</text>
+        <navigator class="view-products-categorys-category-more" url="/pages/search/search?type=category&id={{item.id}}" >更多></navigator>
+      </view>
+      <view class="view-products-categorys-products">
+        <navigator class="view-products-categorys-product" wx:for="{{item.products}}" wx:for-item="product" wx:key="" 
+          url="/pages/product/product?id={{product.id}}" >
+          <image class="view-products-categorys-product-img" src="{{product.img}}" mode='scaleToFill'/>
+          <text class='view-products-categorys-product-name'>{{product.name}}</text>
+          <view>
+            <view class="view-products-categorys-product-price">
+              ￥<text class='view-products-categorys-product-price-number'>{{product.price}}</text>
+            </view>
+            <view class='view-products-categorys-product-sales'>
+              已售<text class='view-products-categorys-product-sales-number'>{{product.sales}}</text>件
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

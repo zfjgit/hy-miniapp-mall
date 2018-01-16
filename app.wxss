@@ -1,0 +1,61 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
+  box-sizing: border-box;
+  background-color: #eee;
+  min-height: 100%;
+  font-size: 30rpx;
+}
+page{
+    height: 100%;
+}
+.class-hide {
+  display: none!important;
+}
+.class-invisible {
+  visibility: hidden;
+}
+.class-title {
+  background-color: #FDF8FF;
+}
+.class-title-item {
+}
+
+.class-right-arrrow-img {
+  width: 20rpx;
+  height: 25rpx;
+}
+.view-item {
+  width: 95%;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  background-color: #fff;
+  margin: 5rpx 0;
+}
+.view-item-title {
+  width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+}
+.view-item-link {
+  width: 15%;
+  text-align: right;
+}
+.view-item-icon {
+  width: 40rpx;
+  height: 40rpx;
+  padding: 0 10rpx;
+}
