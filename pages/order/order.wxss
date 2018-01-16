@@ -1,0 +1,88 @@
+.view-type {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.view-type-item-selected {
+  color: red;
+}
+.view-order-scroll {
+  height: auto;
+  margin-top: 90rpx;
+}
+.view-order {
+  width: 95%;
+  padding: 20rpx;
+  margin-top: 150rpx;
+  background-color: #fff;
+  margin: 10rpx 0;
+}
+.view-order-item {
+  width: 100%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 5rpx 0;
+  padding: 20rpx 0;
+  border-top: solid 1rpx #eee;
+}
+.view-order-item-img {
+  width: 200rpx;
+  height: 100%;
+  border: solid 1rpx #eee;
+}
+.view-order-item-name {
+  width: 59%;
+  height: 70rpx;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
+  margin: 0 20rpx;
+}
+.view-order-item-price {
+  width: 100rpx;
+  text-align: center;
+  color: red;
+}
+.view-order-item-price-number {
+  color: red;
+}
+.view-order-total {
+  text-align: right;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx 0;
+  border-top: solid 1rpx #eee;
+  border-bottom: solid 1rpx #eee;
+}
+.view-order-total-number {
+  font-size: 35rpx;
+  color: red;
+}
+.view-order-operations {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-top: 20rpx;
+}
+.view-order-operations-item {
+  padding: 10rpx 20rpx;
+  border:solid 1rpx #eee;
+  border-radius: 30rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin: 0 10rpx;
+}

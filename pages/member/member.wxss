@@ -1,0 +1,62 @@
+.view-head {
+  width: 100%;
+  height: 320rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #B5091F;
+  padding: 50rpx 0;
+  opacity: 0.9;
+}
+.view-head-img {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  border: solid 1rpx #fff;
+  opacity: 1;
+}
+.view-head-name {
+  margin-top: 20rpx;
+  opacity: 1;
+  color: #fff;
+}
+.view-main-balance {
+  width: 100%;
+  height: 60rpx;
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.view-balance {
+  width: 33%;
+  text-align: center;
+}
+.view-score {
+  width: 33%;
+  text-align: center;
+}
+.view-coupons {
+  width: 33%;
+  text-align: center;
+}
+.view-balance-number {
+  color: red;
+  font-size: 35rpx;
+}
+.view-score-number {
+  color: red;
+  font-size: 35rpx;
+}
+.view-coupons-number {
+  color: red;
+  font-size: 35rpx;
+}
+.view-main{
+  width: 100%;
+}
+

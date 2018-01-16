@@ -1,0 +1,49 @@
+<view class="container">
+  <view class='view-aboutus'>
+    <view class='view-aboutus-logos'>
+      <image wx:for="{{logos}}" wx:key="item" class='view-aboutus-logo-img' src="{{item}}" mode='aspectFit'></image>
+    </view>
+    <view class='view-aboutus-text'>
+      {{introduction}}
+    </view>
+    <view class='view-item' bindtap='addrTap' >
+      <image class='view-item-icon' src="/images/ico-addr.png" mode='aspectFit'></image>
+      <view class='view-item-title'>{{addr}}</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img" mode='aspectFit'></image>
+      </view>
+    </view>
+    <view data-phonenumber="{{telephone}}" class='view-item' bindtap='callTap'>
+      <image class='view-item-icon' src="/images/tel.png" mode='aspectFit'></image>
+      <view class='view-item-title'>{{telephone}}</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </view>
+    <view data-phonenumber="{{mobile}}" class='view-item' bindtap='callTap'>
+      <image class='view-item-icon' src="/images/mobile.png" mode='aspectFit'></image>
+      <view class='view-item-title'>{{mobile}}</view>
+      <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+      </view>
+    </view>
+    <view class='view-item'>
+      <image class='view-item-icon' src="/images/kefu.png" mode='aspectFit'></image>
+      <view class='view-item-title'>{{wechat}}</view>
+      <view class='view-item-link'>
+      </view>
+    </view>
+    <view class='view-item'>
+      <image class='view-item-icon' src="/images/nav/my-on.png" mode='aspectFit'></image>
+      <view class='view-item-title'>{{contactName}}</view>
+      <view class='view-item-link' >
+      </view>
+    </view>
+  </view>
+
+
+  <view class='view-main-copyright'>
+    <view class='view-copyright-holder' bindtap='toMiniAppTap'>Copyright © 2018 煌亿卫浴 版权所有</view>
+    <view class='view-copyright-poweredby'>Powered By Qonhe Tech Inc.</view>
+  </view>
+</view>

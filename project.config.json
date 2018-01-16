@@ -1,0 +1,131 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.7.2",
+	"appid": "wx7c407f9ee6e21b46",
+	"projectname": "hy-miniapp-mall",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "product",
+					"pathName": "pages/product/product",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "notice",
+					"pathName": "pages/notice/notice",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "shopcart",
+					"pathName": "pages/shopcart/shopcart",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "member",
+					"pathName": "pages/member/member",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "aboutus",
+					"pathName": "pages/aboutus/aboutus",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "movable",
+					"pathName": "pages/movable/test",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "orderdetail",
+					"pathName": "pages/orderdetail/orderdetail",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "addrdetail",
+					"pathName": "pages/addrdetail/addrdetail",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "addr",
+					"pathName": "pages/addr/addr",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "coupon",
+					"pathName": "pages/coupon/coupon",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "logistics",
+					"pathName": "pages/logistics/logistics",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "evaluation",
+					"pathName": "pages/evaluation/evaluation",
+					"query": "",
+					"scene": "1001"
+				}
+			]
+		}
+	}
+}

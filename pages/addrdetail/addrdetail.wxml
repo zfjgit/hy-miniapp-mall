@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="view-addr-item">
+    <view class='view-addr-item-title'>收货人</view>
+    <view>
+      <input placeholder='请输入收货人姓名' value='{{addr.name}}'></input>
+    </view>
+  </view>
+
+  <view class="view-addr-item">
+    <view class='view-addr-item-title'>联系电话</view>
+    <view>
+      <input placeholder='请输入联系电话' value='{{addr.tel}}'></input>
+    </view>
+  </view>
+
+  <view class="view-addr-item">
+    <view class='view-addr-item-title'>所在地区</view>
+    <view style='width:80%;'>
+      <picker style='width:100%;' mode="region" data-name="region" value="{{region}}" bindchange="bindRegionChange">
+        <view>当前选择： {{region}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="view-addr-item-detail">
+    <view class='view-addr-item-title'>详细地址</view>
+    <view class='view-addr-item-value'>
+      <textarea class='view-addr-detail' placeholder='请输入收货人姓名' value='{{addr.address}}' ></textarea>
+    </view>
+  </view>
+
+  <view class="view-addr-item-default">
+    <view class='view-addr-item-title'>设为默认收货地址</view>
+    <view class='view-addr-item-default-value'>
+      <icon type="success" size="16" color='{{addr.isDefault ? "red" : "#aaa"}}'/>
+    </view>
+  </view>
+
+  <view class='view-addr-save'>
+    <button type="primary" size="default" form-type='submit' bindtap="saveAddr" class='view-addr-save-button'> 确定 </button>
+  </view>
+</view>

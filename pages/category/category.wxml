@@ -1,0 +1,24 @@
+<view class="container">
+  <view class='view-all'>
+    <view class="view-left">
+      <scroll-view class='view-left-scroll' scroll-y>
+        <view data-cid="{{item.id}}" 
+            class='view-categorys-category {{selectedId == item.id ? "view-categorys-category-selected" : ""}}' 
+            wx:for="{{categoryLevel1s}}" wx:key="item" bindtap='categoryTap'>
+          {{item.name}}
+        </view>
+      </scroll-view>
+    </view>
+    <view class='view-right'>
+      <scroll-view class='view-right-scroll' scroll-y>
+        <view class="view-right-scroll-categorys">
+          <navigator class='view-right-scroll-categorys-category' wx:for="{{categoryLevel2s}}" wx:key="item" 
+            url='/pages/search/search?type=category&id={{item.id}}'>
+            <image src='{{item.img}}' class='view-right-scroll-categorys-category-img'></image>
+            <view class='view-right-scroll-categorys-category-name'>{{item.name}}</view>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

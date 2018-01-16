@@ -1,0 +1,14 @@
+<view class="moveable-item" 
+   bindtouchstart="onTouchStart" 
+   bindtouchmove="onTouchMove"
+   bindtouchend="onTouchEnd"
+   bindtouchcancel="onTouchEnd">
+    <movable-area class="movable-wrapper">
+      <movable-view class='movable-item' out-of-bounds="true" direction="horizontal" x="{{movableView.moveX}}">
+      11111111111111111111111111111111111111111111111111111111111111111111
+      </movable-view>
+    </movable-area>
+    <view class="move-able-delete-section">
+      <text>删除</text>
+    </view>
+  </view> 

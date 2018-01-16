@@ -1,0 +1,74 @@
+<view class="container">
+  <scroll-view class='view-evaluation-scroll' scroll-y>
+    <view class='view-evaluation' wx:for="{{order.items}}" wx:key="item">
+      <navigator class='view-eva-product' url='/pages/product/product?id={{item.id}}'>
+        <image src='{{item.img}}' class='view-product-img'></image>
+        <view>
+          <view>{{item.name}}</view>
+          <view class='view-eva-product-price'>￥{{item.price}}</view>
+        </view>
+      </navigator>
+
+      <view class='view-eva-type'>
+        <view data-idx='{{index}}' data-type='A' class='view-eva-type-item' bindtap='evaluationTypeTap'>
+          <icon type='success' size='20' color='{{item.evaluation.type.code == "A" ? "red" : "#ccc" }}'></icon>
+          <view class='view-eva-type-item-title'>好评</view>
+        </view>
+        <view data-idx='{{index}}' data-type='B' class='view-eva-type-item' bindtap='evaluationTypeTap'>
+          <icon type='success' size='20' color='{{item.evaluation.type.code == "B" ? "red" : "#ccc" }}'></icon>
+          <view class='view-eva-type-item-title'>中评</view>
+        </view>
+        <view data-idx='{{index}}' data-type='C' class='view-eva-type-item' bindtap='evaluationTypeTap'>
+          <icon type='success' size='20' color='{{item.evaluation.type.code == "C" ? "red" : "#ccc" }}'></icon>
+          <view class='view-eva-type-item-title'>差评</view>
+        </view>
+      </view>
+
+      <view class='view-eva-comments'>
+        <textarea class='view-eva-comments-text'></textarea>
+        <image data-idx='{{index}}' src='/images/camera-2.png' class='view-eva-comments-img-button' bindtap='chooseCommentsImgTap'></image>
+      </view>
+
+      <view class='view-eva-comments-imgs'>
+        <view class='view-eva-comments-imgs-item' wx:for="{{item.evaluation.imgs}}" wx:for-item="img" wx:key="" wx:for-index="imgIndex">
+          <image data-itemidx='{{index}}' data-imgidx='{{imgIndex}}' class='view-eva-comments-img' 
+            src='{{img}}' bindtap='showCommentsImgTap'></image>
+          <view class='view-eva-comments-img-del-view'>
+            <image data-itemidx='{{index}}' data-imgidx='{{imgIndex}}' class='view-eva-comments-img-del-img' 
+              src='/images/del-2.png' bindtap='delCommentsImgTap'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='view-eva-shop'>
+      <view class='view-eva-shop-title class-title'>给店铺评分</view>
+      <view class='view-eva-shop-item' wx:for="{{shopEvaluations}}" wx:key="" wx:for-item="shopEvaItem" wx:for-index="shopEvaIndex">
+        <view>{{shopEvaItem.name}}</view>
+        <view>
+          <image data-evaidx='{{shopEvaIndex}}' data-star='{{item}}' bindtap='selectStarTap' 
+            src='{{shopEvaItem.star >= item ? "/images/star-2.png" : "/images/star-1.png" }}' 
+            class='view-eva-shop-item-star' 
+            wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="{{item}}"></image>
+        </view>
+      </view>
+    </view>
+
+    <view bindtap='hideCommentsImgTap' class='view-cover-view {{isHideCommentsImg ? "class-hide" : ""}}'></view>
+    <view class='view-comments-img-swiper-view {{isHideCommentsImg ? "class-hide" : ""}}'>
+      <swiper class='view-comments-img-swiper' current="{{commentsImgsIndex}}" indicator-dots='true' indicator-active-color='red' circular="true">
+        <swiper-item wx:for="{{commentsImgs}}" wx:key="item">
+          <image src="{{item}}" class="view-comments-img-swiper-img" />
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class='view-eva-submit'>
+      <view class='view-eva-submit-noname' bindtap='nonameTap'>
+        <icon class='view-eva-submit-noname-icon' type="success" size='20' color='{{isNoName ? "red" : "#ccc"}}'></icon>
+        <view class='view-eva-submit-noname-title'>匿名评价</view>
+      </view>
+      <view class='view-eva-submit-button' bindtap='submitEvaluationTap'>发表评价</view>
+    </view>
+  </scroll-view>
+</view>

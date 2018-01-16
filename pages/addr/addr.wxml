@@ -1,0 +1,36 @@
+<view class="container">
+
+  <scroll-view class='view-addrs' scroll-y>
+    <view class='view-addr' wx:for="{{addrs}}" wx:key="item">
+      <navigator url='/pages/addrdetail/addrdetail?id={{item.id}}'>
+        <view class='view-addr-name'>
+          <view class='view-addr-name-text'>{{item.name}}</view>
+          <view class='view-addr-name-tel'>{{item.tel}}</view>
+        </view>
+        <view class='view-addr-address'>
+          {{item.fullAddress}}
+        </view>
+      </navigator>
+      <view class='view-addr-operations'>
+        <view data-idx='{{index}}' class='view-addr-operations-default' bindtap='defaultTap'>
+          <icon type="success" size="15" color='{{item.isDefault ? "red" : "#aaa"}}'/>
+          <view class='view-addr-operations-default-text'>设为默认</view>
+        </view>
+        <view class='view-addr-operations-edit'>
+          <navigator class='view-addr-edit' url='/pages/addrdetail/addrdetail?id={{item.id}}'>
+            <image class='view-addr-edit-icon view-icon' src="/images/edit-2.png"></image>
+            <view class="">编辑</view>
+          </navigator>
+          <view data-idx='{{index}}' class='view-addr-del' bindtap='delTap'>
+            <image class='view-addr-del-icon view-icon' src="/images/del-2.png"></image>
+            <view class="">删除</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  
+  <view class='view-addr-add'>
+    <navigator class='view-addr-add-button' url='/pages/addrdetail/addrdetail'>添加新地址</navigator>
+  </view>
+</view>

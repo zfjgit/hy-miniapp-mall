@@ -1,0 +1,24 @@
+<view class='container'>
+  <scroll-view class='view-coupons' scroll-y>
+    <view class='view-coupon {{item.isExpired || item.isUsed ? "view-coupon-bg-none" : "" }}' 
+      wx:for="{{coupons}}" wx:key="item">
+      <view class='view-coupon-name'>
+        <view class='view-coupon-name-title'>{{item.name}}</view>
+      </view>
+      <view class='view-coupon-validate'>
+        <view>
+          <view>有效期：</view>
+          <view>{{item.startDate}} - {{item.endDate}}</view>
+        </view>
+        <view data-idx='{{index}}' class='view-coupon-intro-title' bindtap='showIntroTap'>
+          <view class='view-coupon-intro-text'>使用说明</view>
+          <image class='view-coupon-intro-img' src='{{item.isIntroShow ? "/images/up-1.png" : "/images/down-1.png"}}'></image>
+        </view>
+      </view>
+      <text class="{{item.isIntroShow ? 'view-coupon-intro-show' : 'view-coupon-intro-hidden'}} view-coupon-intro">{{item.intro}}</text>
+      <view class='view-coupon-used {{item.isExpired || item.isUsed ? "view-coupon-intro-show" : "view-coupon-intro-hidden" }}'>
+        {{item.isExpired ? '已过期' : (item.isUsed ? '已使用' : '')}}
+      </view>
+    </view>
+  </scroll-view>
+</view>

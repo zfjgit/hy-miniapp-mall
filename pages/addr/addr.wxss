@@ -1,0 +1,88 @@
+.view-addrs {
+  width: 100%;
+  margin-bottom: 150rpx;
+  background-color: #eee;
+}
+.view-addr {
+  width: 95%;
+  height: 200rpx;
+  padding: 20rpx;
+  background-color: white;
+  margin: 10rpx 0;
+}
+.view-addr-name {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.view-addr-address {
+  width: 100%;
+  padding-bottom: 30rpx;
+}
+
+.view-addr-operations {
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-top: solid 1rpx #eee;
+}
+
+.view-addr-edit {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.view-addr-del {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 30rpx;
+}
+
+.view-addr-operations-default {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10rpx 0;
+}
+.view-addr-operations-default-text {
+  margin-left: 10rpx;
+}
+
+.view-addr-operations-edit {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 10rpx 0;
+}
+
+.view-icon {
+  width: 35rpx;
+  height: 35rpx;
+  margin: 0 10rpx;
+}
+.view-addr-add {
+  width: 95%;
+  padding: 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  background-color: #FDF8FF;
+}
+.view-addr-add-button {
+  widows: 90%;
+  text-align: center;
+  padding: 20rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #FD6D17;
+  color: white;
+  border-radius: 50rpx;
+}
