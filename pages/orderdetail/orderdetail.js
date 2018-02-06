@@ -63,6 +63,28 @@ Page({
     ]
   },
 
+  delTap: function(e) {
+    var _this = this;
+    var idx = e.currentTarget.dataset.idx;
+    wx.showModal({
+      title: '确认',
+      content: '确定要删除这个订单？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '订单已删除',
+            success: function (res) {
+              wx.navigateBack({
+              });
+            }
+          });
+        }
+      }
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

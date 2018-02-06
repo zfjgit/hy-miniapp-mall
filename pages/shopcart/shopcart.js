@@ -217,7 +217,9 @@ Page({
     return total;
   },
   buyTap: function() {
-    console.log('buyTap');
+    wx.navigateTo({
+      url: '/pages/pay/pay?',
+    });
   },
   resetMode : function(mode) {
     this.setData({
