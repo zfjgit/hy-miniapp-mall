@@ -16,9 +16,9 @@ Page({
       duration: 500,
       circular: true,
       indicatorActiveColor: 'red',
-      images: [{ url: "/images/banner01.jpg", productId: 100 }, 
-        { url: "/images/banner02.jpg", productId: 101 }, 
-        { url: "/images/banner03.jpg", productId: 102 }]
+      images: [{ url: "/images/800x450-2.jpg", productId: 100 }, 
+        { url: "/images/800x504c.jpg", productId: 101 }, 
+        { url: "/images/554x380.jpg", productId: 102 }]
     },
     noticeSwiper : {
       notices: [{ title: "庆祝商城上线，优惠促销活动！", id: 1 }, 

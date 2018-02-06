@@ -16,7 +16,8 @@
     "pages/orderdetail/orderdetail",
     "pages/logistics/logistics",
     "pages/evaluation/evaluation",
-    "pages/addrdetail/addrdetail"
+    "pages/addrdetail/addrdetail",
+    "pages/pay/pay"
   ],
   "window": {
     "backgroundTextStyle": "light",

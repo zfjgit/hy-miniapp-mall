@@ -31,7 +31,9 @@ Page({
       { id: 1, content: '好东西！', createTime: '2017-11-12 12:32:01', customer: { id: 1, name: '张三' } },
     ],
     showAddToCart: 0,
-    addToCartNumber: 1
+    showBuyNumber: 0,
+    addToCartNumber: 1,
+    buyNumber: 1,
   },
 
   switchShopcartTap: function () {
@@ -43,9 +45,12 @@ Page({
     var id = this.data.product.id;
     this.setData({ showAddToCart: 1 });
   },
-  buyTap: function () {
+  showBuyNumberTap: function () {
     var id = this.data.product.id;
-    console.log("id=" + id);
+    this.setData({ showBuyNumber: 1 });
+  },
+  buyTap: function() {
+
   },
   addToCartNumberDec: function() {
     var n = this.data.addToCartNumber;
@@ -61,7 +66,7 @@ Page({
   },
   hideAddToCartTap: function () {
     this.setData({ addToCartNumber: 1 });
-    this.setData({ showAddToCart: 0 });
+    this.setData({ showAddToCart: 0, showBuyNumber: 0 });
   },
   addToCartTap: function() {
     this.setData({ addToCartNumber: 1 });

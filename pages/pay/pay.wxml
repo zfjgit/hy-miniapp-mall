@@ -1,0 +1,45 @@
+<view class="container">
+  <scroll-view scroll-y class='order-pay-scroll'>
+    <navigator class='view-order-receiver' url='/pages/addr/addr?id=1'>
+      <image src="/images/pkg-1.png" class='view-order-receiver-icon'></image>
+      <view class='view-order-receiver-detail'>
+        <view class='view-order-receiver-name'>收货人：张三</view>
+        <view class='view-order-receiver-addr'>收货地址：广东省 深圳市 福田区 沙头街道 5巷1号</view>
+      </view>
+      <image src="/images/arrow-right.png" class='view-order-receiver-arrow'></image>
+    </navigator>
+
+    <view class='view-order-products'>
+      <navigator class='view-order-item' wx:for="{{products}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
+        <image class='view-order-item-img' src='{{item.img}}' mode='aspectFill'></image>
+        <view class='view-order-item-name'>{{item.name}}</view>
+        <view class='view-order-item-price'>
+          <view class='view-order-item-price-number'>￥{{item.price}}</view>
+          <view class='view-order-item-number'>x{{item.qty}}</view>
+        </view>
+      </navigator>
+    </view>
+
+    <view class="view-order-total">
+      <view class='view-order-msg'>
+        <view class='view-order-msg-title'>买家留言：</view>
+        <input class='view-order-msg-content' placeholder='选填：填写内容已和卖家协商确认' maxlength='50'></input>
+      </view>
+      <view class='view-order-ship-money'>
+        <view>运费</view>
+        <view>￥<text>0.00</text></view>
+      </view>
+      <view class='view-order-total-money'>
+        <view class='view-order-total-count'>共 <text>2</text> 件商品</view>
+        <view class=''>小计：</view>
+        <view class='view-order-total-money-text'>￥<text class='view-order-total-money-number'>1320.00</text></view>
+      </view>
+    </view>
+  </scroll-view>
+  
+  <view class='view-order-operations'>
+    <view>合计：</view>
+    <view class='view-order-total-sum'>￥<text class='view-order-total-sum-number'>9000.00</text></view>
+    <view class='view-order-operations-submit'>提交订单</view>
+  </view>
+</view>
