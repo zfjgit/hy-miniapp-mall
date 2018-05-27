@@ -30,7 +30,7 @@
   text-align: right;
 }
 
-.view-publishDte{
+.view-publishDate{
   width: 82%;
   padding: 0;
   font-size: 30rpx;

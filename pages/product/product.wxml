@@ -12,11 +12,11 @@
 
     <view class='view-product-detail'>
       <view class='view-product-name'>{{product.name}}</view>
-      <view class='view-product-promotion'>{{product.promotion}}</view>
+      <!--<view class='view-product-promotion'>{{product.promotion}}</view>-->
       <view class="view-product-detail-datas">
         <view class='view-product-detail-price'>￥<text class='view-product-detail-price-number'>{{product.price}}</text></view>
         <view class='view-product-detail-sales'>已成交 <text class='view-product-detail-sales-number'>{{product.sales}}</text> 件</view>
-        <view class='view-product-detail-starts'>已收到 <text class='view-product-detail-starts-number'>{{product.starts}}</text> 好评</view>
+        <view class='view-product-detail-starts'>库存 <text class='view-product-detail-starts-number'>{{product.storageNumber}}</text> 件</view>
       </view>
     </view>
 
@@ -52,14 +52,14 @@
       <view class='view-product-bottom-menu-addtoshopcart' bindtap='addToShopcartTap'>
         加入购物车
       </view>
-      <view class='view-product-bottom-menu-buy' bindtap='showBuyNumberTap'>
+      <view class='view-product-bottom-menu-buy class-hide' bindtap='showBuyNumberTap'>
         立即购买
       </view>
     </view>
 
     <view class='view-addtocart class-title {{showAddToCart == 0 && showBuyNumber == 0 ? "class-hide" : ""}}'>
       <view class='view-addtocart-product'>
-        <image class='view-addtocart-product-img' src='{{product.img}}' mode='aspectFill'></image>
+        <image class='view-addtocart-product-img' src='{{product.imgs[0]}}' mode='aspectFill'></image>
         <view class='view-addtocart-product-detail'>
           <view class='view-addtocart-product-detail-name'>{{product.name}}</view>
           <view class='view-addtocart-product-detail-price'>
@@ -70,14 +70,14 @@
       <view class='view-addtocart-product-sku'>
       </view>
       <view class='view-addtocart-product-number-view'>
-        <text>购买数量</text>
+        <text>数量</text>
         <view>
-          <text class='view-addtocart-product-number-dec' bindtap='addToCartNumberDec'>-</text>
+          <text class='view-addtocart-product-number-dec' bindtap='{{showAddToCart == 1 ? "addToCartNumberDec" : "buyNumberDec"}}'>-</text>
           <text class='view-addtocart-product-number'>{{showAddToCart == 1 ? addToCartNumber : buyNumber}}</text>
-          <text class='view-addtocart-product-number-inc' bindtap='addToCartNumberInc'>+</text>
+          <text class='view-addtocart-product-number-inc' bindtap='{{showAddToCart == 1 ? "addToCartNumberInc" : "buyNumberInc"}}'>+</text>
         </view>
       </view>
-      <view class='view-addtocart-product-button' bindtap='{{showAddToCart == 1 ? "addToCartTap" : "buyTap"}}'>
+      <view class='view-addtocart-product-button' bindtap='{{showAddToCart == 1 ? "confirmAddToCartTap" : "confirmBuyTap"}}'>
         确定
       </view>
     </view>

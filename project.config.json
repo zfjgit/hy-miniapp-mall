@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -20,12 +20,16 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 14,
 			"list": [
 				{
 					"id": -1,
@@ -35,17 +39,17 @@
 					"scene": "1001"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "product",
 					"pathName": "pages/product/product",
-					"query": "",
+					"query": "id=297",
 					"scene": "1001"
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "notice",
 					"pathName": "pages/notice/notice",
-					"query": "",
+					"query": "id=2&catid=31",
 					"scene": "1001"
 				},
 				{
@@ -126,10 +130,10 @@
 					"scene": "1001"
 				},
 				{
-					"id": -1,
+					"id": 14,
 					"name": "pay",
 					"pathName": "pages/pay/pay",
-					"query": "",
+					"query": "ids=286,301&nums=1,3",
 					"scene": "1001"
 				}
 			]

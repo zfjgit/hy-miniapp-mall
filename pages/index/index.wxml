@@ -14,7 +14,7 @@
   <view class="view-notice">
     <view class='view-notice-title'>公告：</view>
     <swiper class='view-notice-swiper' vertical='true' autoplay='true'>
-      <navigator wx:for="{{noticeSwiper.notices}}" wx:key="item" url="/pages/notice/notice?id={{item.id}}" open-type="navigate">
+      <navigator wx:for="{{noticeSwiper.notices}}" wx:key="item" url="/pages/notice/notice?catid={{item.catid}}&id={{item.id}}" open-type="navigate">
         <swiper-item>
           <view class="view-notice-text">{{item.title}}</view>
         </swiper-item>
@@ -59,7 +59,7 @@
               ￥<text class='view-products-categorys-product-price-number'>{{product.price}}</text>
             </view>
             <view class='view-products-categorys-product-sales'>
-              已售<text class='view-products-categorys-product-sales-number'>{{product.sales}}</text>件
+              已售 <text class='view-products-categorys-product-sales-number'>{{product.sales}}</text> 件
             </view>
           </view>
         </navigator>

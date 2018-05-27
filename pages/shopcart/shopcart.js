@@ -11,36 +11,9 @@ Page({
       moveX: 0,
     },
     products: [
-        { id: 1, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91', img: '/images/goods02.png', number: 1, 
+        { itemId: 1, id: 1, pid: 1, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91', img: '/images/goods02.png', number: 1, 
           storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        { id: 2, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A92 91', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        {
-          id: 3, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A92 91', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0},
-        {
-          id: 4, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0},
-        {
-          id: 5, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        {
-          id: 6, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        {
-          id: 7, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        {
-          id: 8, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0 },
-        {
-          id: 9, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0
-        },
-        {
-          id: 10, sales: 321, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 A9291', img: '/images/goods02.png', number: 1,
-          storage: 1000, isBuySelected: 0, isEditSelected: 0
-        },
+        
     ],
     page: {
       current: 1,
@@ -83,23 +56,42 @@ Page({
   deleteTap: function() {
     wx.showLoading({ mask: true });
     var newProducts = [];
-    var deletedProductIdxs = [];
+    var deletedCartIds = [];
     for (var i = 0; i < this.data.products.length; i++) {
       var p = this.data.products[i];
       if (p.isEditSelected == this.data.flag_yes) {
-        deletedProductIdxs.push(p.id);
+        deletedCartIds.push(p.itemId);
       } else {
         newProducts.push(p);
       }
     }
-    if (deletedProductIdxs.length == 0) {
+    if (deletedCartIds.length == 0) {
       return;
     }
     // delete request
-
-    this.setData({products: newProducts });
-    this.editConfirmTap();
-    wx.hideLoading();
+    var _this = this;
+    wx.request({
+      url: getApp().globalData.server + '/api/shop/cart/batch-delete.do',
+      data: { ids: deletedCartIds },
+      method: 'POST',
+      header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        var d = res.data;
+        if (d.result == 1) {
+          _this.data.products = newProducts;
+          _this.setData({ products: _this.data.products });
+          _this.calcTotal();
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: '操作失败',
+          });
+        }
+      },
+      complete: function () {
+        wx.hideLoading();
+      }
+    });
   },
   selectTap: function(e) {
     wx.showLoading({ mask: true });
@@ -168,7 +160,8 @@ Page({
     wx.showLoading({ mask: true });
 
     var idx = e.currentTarget.dataset.idx;
-    var n = this.data.products[idx].number;
+    var p = this.data.products[idx];
+    var n = p.number;
     if(n <= 1) {
       return;
     }
@@ -176,30 +169,49 @@ Page({
     n = Math.max(1, n);
     // request
 
-
-    this.data.products[idx].number = n;
-    this.setData({products: this.data.products});
-    wx.hideLoading();
-
-    this.calcTotal();
+    var d = { cartid: p.itemId, num: n, productid: p.pid };
+    this.updateNum(d, idx);
   },
   productNumberIncTap: function (e) {
     wx.showLoading({ mask: true });
 
     var idx = e.currentTarget.dataset.idx;
-    var n = this.data.products[idx].number;
-    if (n >= this.data.products[idx].storage) {
+    var p = this.data.products[idx];
+    var n = p.number;
+    if (n >= p.storage) {
       return;
     }
     n ++;
-    n = Math.min(n, this.data.products[idx].storage);
+    n = Math.min(n, p.storage);
     // request
 
-    this.data.products[idx].number = n;
-    this.setData({ products: this.data.products });
-    wx.hideLoading();
+    var d = { cartid: p.itemId, num: n, productid: p.pid };
+    this.updateNum(d, idx);
+  },
 
-    this.calcTotal();
+  updateNum: function(params, idx) {
+    var _this = this;
+    wx.request({
+      url: getApp().globalData.server + '/api/shop/cart/update-num.do',
+      data: params,
+      header: { 'cookie': wx.getStorageSync("sessionid") },
+      success: function (res) {
+        var d = res.data;
+        if (d.result == 1) {
+          _this.data.products[idx].number = params.num;
+          _this.setData({ products: _this.data.products });
+          _this.calcTotal();
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: '操作失败',
+          });
+        }
+      },
+      complete: function () {
+        wx.hideLoading();
+      }
+    });
   },
   
   calcTotal: function() {
@@ -217,8 +229,16 @@ Page({
     return total;
   },
   buyTap: function() {
+    var ids = [];
+    var nums = [];
+    this.data.products.forEach(function(item, idx){
+      if(item.isBuySelected) {
+        ids.push(item.id);
+        nums.push(item.number);
+      }
+    });
     wx.navigateTo({
-      url: '/pages/pay/pay?',
+      url: '/pages/pay/pay?ids=' + ids.join(',') + '&nums=' + nums.join(','),
     });
   },
   resetMode : function(mode) {
@@ -291,10 +311,29 @@ Page({
     var p = this.data.products[idx];
     // delete
 
-    this.data.products.splice(idx, 1);
-    this.setData({ products: this.data.products });
-    this.calcTotal();
-    wx.hideLoading();
+    var _this = this;
+    wx.request({
+      url: getApp().globalData.server + '/api/shop/cart/delete',
+      data: {cartid: p.itemId },
+      header: { 'cookie': wx.getStorageSync("sessionid") },
+      success: function(res) {
+        var d = res.data;
+        if(d.result == 1) {
+          _this.data.products.splice(idx, 1);
+          _this.setData({ products: _this.data.products });
+          _this.calcTotal();
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: '操作失败',
+          });
+        }
+      },
+      complete: function() {
+        wx.hideLoading();
+      }
+    });
+    
   },
 
   /**
@@ -302,6 +341,26 @@ Page({
    */
   onLoad: function (options) {
     this.setMode(this.data.mode_buy);
+
+    var _this = this;
+    wx.request({
+      url: getApp().globalData.server + '/api/shop/cart/get-cart-list.do',
+      header: { 'cookie': wx.getStorageSync("sessionid") },
+      success: function(res) {
+        console.log(res);
+        var d = res.data;
+        _this.data.products = [];
+        if(d.result == 1 && d.data && d.data.length > 0) {
+          for(var i = 0; i < d.data.length; i ++) {
+            var p = d.data[i];
+            _this.data.products.push({
+              itemId: p.id, id: p.goods_id, pid: p.product_id, name: p.name, storage: p.storage, number: p.num, 
+              img: p.image_default, price: p.price, isBuySelected: 0, isEditSelected: 0 });
+          }
+        }
+        _this.setData({products: _this.data.products});
+      }
+    })
   },
 
   /**

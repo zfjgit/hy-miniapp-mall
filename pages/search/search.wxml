@@ -1,8 +1,8 @@
 <view class="container">
-  <view class='view-search' bindtap='searchTap'>
-    <input class="view-search-input" placeholder="请输入关键字搜索您喜欢的商品" placeholder-class='input-placeholder' 
-        confirm-type='search' value="{{search.text}}"/>
-      <image class="view-search-button" src='/images/search-pic.png' />
+  <view class='view-search'>
+    <input class="view-search-input" placeholder="请输入关键字....." placeholder-class='input-placeholder' 
+        confirm-type='search' bindinput='searchChange' value="{{search.text}}"/>
+      <image bindtap='searchTap' class="view-search-button" src='/images/search-pic.png' />
   </view>
 
   <view class='view-search-history {{(historys.length == 0 || showSorts == 0) ? "class-hide" : ""}}'>
@@ -10,12 +10,15 @@
       <view class='view-search-history-title-name'>历史搜索记录</view>
       <view class='view-search-history-clear' bindtap='clearSearchHistoryAllTap'>清空所有记录</view>
     </view>
-    <view class='view-search-history-list'>
+    <view class='view-search-history-list {{isHistoryShow ? "" : "class-hide"}}'>
       <view class='view-search-history-list-history' wx:for="{{historys}}" wx:key="item">
-        <view data-text="{{item.text}}" class='view-search-history-list-history-content' bindtap='searchWithHistoryTap'>{{item.text}}</view>
-        <view data-hid="{{item.id}}" class='view-search-history-list-history-clear' bindtap='clearSearchHistoryOneTap'>删除</view>
+        <view data-text="{{item}}" class='view-search-history-list-history-content' bindtap='searchWithHistoryTap'>{{item}}</view>
+        <view data-text="{{item}}" class='view-search-history-list-history-clear' bindtap='clearSearchHistoryOneTap'>删除</view>
       </view>
     </view>
+    <view class='view-search-history-hide' bindtap='hideHistoryTap'><image class='view-item-icon' 
+      src="{{isHistoryShow ? '/images/up-1.png' : '/images/down-1.png' }}" mode='aspectFit' 
+      style='width:25rpx;'></image>{{isHistoryShow ? '收起' : '展开'}}</view>
   </view>
 
   
@@ -37,6 +40,7 @@
           <view class='view-search-results-product-sales'>已成交 <text class='view-search-results-product-sales-number'>{{item.sales}}</text> 件</view>
         </view>
       </navigator>
+      <view class='{{ searchResults.length > 0 ? "class-hide" : "" }}'>抱歉！没有查询到数据</view>
     </scroll-view>
   </view>
 </view>

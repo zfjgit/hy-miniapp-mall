@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Hello Honey!',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -21,9 +21,9 @@ Page({
         { url: "/images/554x380.jpg", productId: 102 }]
     },
     noticeSwiper : {
-      notices: [{ title: "庆祝商城上线，优惠促销活动！", id: 1 }, 
-        { title: "2018年春节放假通知", id: 2 }, 
-        { title: "2018年新款上市预告！", id: 3 }]
+      notices: [{ title: "庆祝商城上线，优惠促销活动！", id: 1, catid: 31 }, 
+        { title: "2018年春节放假通知", id: 2, catid: 31 }, 
+        { title: "2018年新款上市预告！", id: 3, catid: 31 }]
     },
     categoryScroll : {
       categorys : [
@@ -91,39 +91,114 @@ Page({
   },
 
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    this.getAdvList();
+
+    this.getNotices();
+
+    this.getCategorys();
+
+    this.getCategoryGoods();
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
+  getAdvList: function() {
+    var _this = this;
+
+    wx.request({
+      url: app.globalData.server + '/api/shop/advlist/get-adv-list.do',
+      data: { acid: 14 },
+      success: function (res) {
+        var r = res.data;
+        if (r && r.result == 1) {
+          var imgs = [];
+          for (var i = 0; i < r.data.length; i++) {
+            imgs.push({ url: r.data[i].atturl, productId: r.data[i].url });
+          }
+          _this.data.bannerSwiper.images = imgs;
+          _this.setData({ bannerSwiper: _this.data.bannerSwiper });
+        }
+      }
+    });
+  },
+
+  getNotices: function() {
+    var _this = this;
+
+    var catid = 31;
+    wx.request({
+      url: app.globalData.server + '/api/shop/notice/get-notice-list.do',
+      data: { catid: catid },
+      success: function (res) {
+        var r = res.data;
+        if (r && r.result == 1) {
+          var notices = [];
+          for (var i = 0; i < r.data.length; i++) {
+            notices.push({ title: r.data[i].title, id: r.data[i].id, catid: catid });
+          }
+          _this.data.noticeSwiper.notices = notices;
+          _this.setData({ noticeSwiper: _this.data.noticeSwiper });
+        }
+      }
+    });
+  },
+
+  getCategorys: function() {
+    var _this = this;
+    wx.request({
+      url: app.globalData.server + '/api/shop/goods/get-categorys.do',
+      success: function (res) {
+        var r = res.data;
+        if (r && r.result == 1) {
+          var categorys = [];
+          for (var i = 0; i < r.data.length; i++) {
+            var c = r.data[i];
+            var img = !c.image ? '/images/categorys/category-1.png' : c.image;
+            categorys.push({ img: img, name: c.name, id: c.cat_id});
+          }
+          _this.data.categoryScroll.categorys = categorys;
+          _this.setData({categoryScroll: _this.data.categoryScroll});
+        }
+      }
+    });
+  },
+
+  getCategoryGoods: function() {
+    var _this = this;
+
+    wx.request({
+      url: app.globalData.server + '/api/shop/goods/get-category-goods.do',
+      data: { cateids: '160,159,164', tagid: 1, count: 6 },
+      success: function (res) {
+        var r = res.data;
+        if (r && r.result == 1) {
+          var categoryGoods = [];
+          for(var i = 0; i < r.data.length; i ++) {
+            var c = r.data[i];
+            var products = [];
+            for (var j = 0; j < c.products.length; j++) {
+              var p = c.products[j];
+              products.push({img: p.small.replace('fs:', app.globalData.server + app.globalData.statics_path), 
+                name: p.name, id: p.goods_id, price: p.price, sales: p.buy_count});
+            }
+            categoryGoods.push({id: c.id, name: c.name, products: products});
+          }
+          _this.data.categoryProducts = categoryGoods;
+          _this.setData({ categoryProducts: _this.data.categoryProducts });
+        }
+      }
+    });
+  },
+  
+  onShareAppMessage: function(res) {
+    return {
+      title: app.globalData.appTitleText,
+      path: '/pages/index/index',
+      imageUrl: app.globalData.appLogo,
+      success: function(res) {
+        wx.showToast({
+          title: '分享成功',
+          duration: 1000
+        });
+      }
+    };
   }
 })

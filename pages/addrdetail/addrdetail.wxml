@@ -2,14 +2,14 @@
   <view class="view-addr-item">
     <view class='view-addr-item-title'>收货人</view>
     <view>
-      <input placeholder='请输入收货人姓名' value='{{addr.name}}'></input>
+      <input bindinput='bindName' placeholder='请输入收货人姓名' value='{{addr.name}}'></input>
     </view>
   </view>
 
   <view class="view-addr-item">
     <view class='view-addr-item-title'>联系电话</view>
     <view>
-      <input placeholder='请输入联系电话' value='{{addr.tel}}'></input>
+      <input bindinput='bindTel' placeholder='请输入联系电话' value='{{addr.tel}}'></input>
     </view>
   </view>
 
@@ -17,7 +17,7 @@
     <view class='view-addr-item-title'>所在地区</view>
     <view style='width:80%;'>
       <picker style='width:100%;' mode="region" data-name="region" value="{{region}}" bindchange="bindRegionChange">
-        <view>当前选择： {{region}}</view>
+        <view>： {{region}}</view>
       </picker>
     </view>
   </view>
@@ -25,13 +25,27 @@
   <view class="view-addr-item-detail">
     <view class='view-addr-item-title'>详细地址</view>
     <view class='view-addr-item-value'>
-      <textarea class='view-addr-detail' placeholder='请输入收货人姓名' value='{{addr.address}}' ></textarea>
+      <textarea bindinput='bindDetailAddr' class='view-addr-detail' placeholder='请输入详细地址' value='{{addr.address}}' ></textarea>
+    </view>
+  </view>
+
+  <view class="view-addr-item">
+    <view class='view-addr-item-title'>邮政编码</view>
+    <view>
+      <input bindinput='bindZip' placeholder='邮政编码' value='{{addr.zip}}' ></input>
+    </view>
+  </view>
+
+  <view class="view-addr-item">
+    <view class='view-addr-item-title'>地址名称</view>
+    <view >
+      <input bindinput='bindAddrName' placeholder='家、公司、代收点' value='{{addr.shipAddressName}}' ></input>
     </view>
   </view>
 
   <view class="view-addr-item-default">
     <view class='view-addr-item-title'>设为默认收货地址</view>
-    <view class='view-addr-item-default-value'>
+    <view class='view-addr-item-default-value' bindtap='setDefault'>
       <icon type="success" size="16" color='{{addr.isDefault ? "red" : "#aaa"}}'/>
     </view>
   </view>

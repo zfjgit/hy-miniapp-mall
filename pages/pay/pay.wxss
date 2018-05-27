@@ -45,7 +45,6 @@
   justify-content: flex-start;
   margin: 10rpx 0;
   padding: 10rpx;
-  border-bottom: solid 1rpx #eee;
 }
 .view-order-item-img {
   width: 200rpx;
@@ -57,6 +56,10 @@
 .view-order-item-price {
   color: red;
   text-align: center;
+}
+.view-order-item-number {
+  margin-top: 10rpx;
+  text-align: right;
 }
 .view-order-total {
   width: 95%;

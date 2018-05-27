@@ -2,7 +2,7 @@
   <view class='view-notice'>
     <view class='view-title'>{{notice.title}}</view>
     <view class='view-content'>{{notice.content}}</view>
-    <view class='view-company'>煌亿卫浴</view>
-    <view class='view-publishDte'>{{notice.publishDte}}</view>
+    <view class='view-company'>{{notice.publisher}}</view>
+    <view class='view-publishDate'>{{notice.publishdate}}</view>
   </view>
 </view>

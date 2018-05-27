@@ -55,6 +55,13 @@
   padding: 20rpx;
   background-color: #fff;
 }
+.view-search-history-hide {
+  width: 100%;
+  padding: 10rpx 20rpx;
+  background-color: #fff;
+  text-align: center;
+  border-top: dotted 1rpx #ddd;
+}
 .view-search-history-list-history {
   width: 100%;
   height: auto;
