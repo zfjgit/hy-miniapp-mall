@@ -84,5 +84,5 @@
   line-height: 60rpx;
   background-color: #FD6D17;
   color: white;
-  border-radius: 50rpx;
+  border-radius: 10rpx;
 }

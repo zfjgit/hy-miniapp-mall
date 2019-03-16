@@ -18,13 +18,14 @@
 .view-order-scroll {
   height: auto;
   margin-top: 90rpx;
+  background-color: #f8f8f8;
 }
 .view-order {
   width: 95%;
   padding: 20rpx;
   margin-top: 150rpx;
   background-color: #fff;
-  margin: 10rpx 0;
+  margin: 40rpx 0;
 }
 .view-order-item {
   width: 100%;
@@ -65,24 +66,48 @@
   border-top: solid 1rpx #eee;
   border-bottom: solid 1rpx #eee;
 }
+.view-order-status {
+  text-align: right;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 20rpx 0;
+  border-top: solid 1rpx #eee;
+  border-bottom: solid 1rpx #eee;
+  display: flex;
+  justify-content: space-between;
+}
+.view-order-status-time {
+	font-size: 13px;
+	color: #aaa;
+}
 .view-order-total-number {
   font-size: 35rpx;
   color: red;
 }
+
+.view-order-operations-flex-item {
+	display: flex;
+    justify-content: space-between;
+}
+.view-order-operations-flex-space {
+	flex: 1;
+}
 .view-order-operations {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
   height: 60rpx;
   line-height: 60rpx;
   padding-top: 20rpx;
 }
 .view-order-operations-item {
-  padding: 10rpx 20rpx;
+  padding: 5rpx 15rpx;
   border:solid 1rpx #eee;
-  border-radius: 30rpx;
+  border-radius: 10rpx;
   height: 40rpx;
   line-height: 40rpx;
   margin: 0 10rpx;
+  font-size: 12px;
+}
+
+.view-order-operations-status-btn {
+	background-color: red;
+	color: white;
 }

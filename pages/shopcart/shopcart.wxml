@@ -16,10 +16,11 @@
         bindlongpress='onLongPress'
         >
         <movable-area class="view-cart-product-movable-area">
-          <movable-view class='view-cart-product-movable-view' out-of-bounds="true" direction="horizontal" x="{{item.moveX ? item.moveX : 0}}" 
-            friction='10' damping='50'>
-
-            <view data-idx="{{index}}" class='view-cart-select' bindtap='selectTap'>
+          
+		  <movable-view class='view-cart-product-movable-view' out-of-bounds="true" direction="horizontal" x="{{item.moveX ? item.moveX : 0}}" 
+            friction='10' damping='50' disabled="true">
+		  
+		    <view data-idx="{{index}}" class='view-cart-select' bindtap='selectTap'>
               <icon type="success" size="20" 
                 color='{{ mode == mode_buy ? (item.isBuySelected == flag_yes ? "red" : "#ccc") : (item.isEditSelected == flag_yes ? "red" : "#ccc") }}'/>
             </view>

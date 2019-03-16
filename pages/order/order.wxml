@@ -1,28 +1,39 @@
 <view class="container">
-  <view class='view-type class-title'>
-    <view data-code='{{item.code}}' class="class-title-item {{selectedCode == item.code ? 'view-type-item-selected' : ''}}" 
-      wx:for="{{types}}" wx:key="item" bindtap='typeTap'>{{item.name}}</view>
-  </view>
-  <scroll-view class='view-order-scroll' scroll-y>
-    <view class='view-order' wx:for="{{orders}}" wx:for-item="order" wx:key="">
-      <navigator url='/pages/orderdetail/orderdetail?id={{order.id}}'>
-        <view class='view-order-item' wx:for="{{order.items}}" wx:key="item">
-          <image class='view-order-item-img' src='{{item.img}}' mode='aspectFill'></image>
-          <view class='view-order-item-name'>{{item.name}}</view>
-          <view class='view-order-item-price'>
-            <view class='view-order-item-price-number'>￥{{item.price}}</view>
-            <view class='view-order-item-number'>x{{item.qty}}</view>
-          </view>
-        </view>
-      </navigator>
-      <view class="view-order-total">
-        共1件商品，合计￥<text class='view-order-total-number'>{{order.total}}</text> 元（含运费￥{{order.ship}} 元）
-      </view>
-      <view class='view-order-operations'>
-        <view data-idx='{{index}}' class='view-order-operations-item' bindtap='delTap'>删除订单</view>
-        <navigator class='view-order-operations-item' url='/pages/logistics/logistics?id={{item.id}}'>查看物流</navigator>
-        <navigator class='view-order-operations-item' url='/pages/evaluation/evaluation?id={{item.id}}'>评价</navigator>
-      </view>
+    <view class='view-type class-title'>
+        <view data-code='{{item.code}}' class="class-title-item {{selectedType == item.code ? 'view-type-item-selected' : ''}}" wx:for="{{types}}" wx:key="item" bindtap='typeTap'>{{item.name}}</view>
     </view>
-  </scroll-view>
+    <scroll-view class='view-order-scroll' scroll-y>
+        <view class='view-order' wx:for="{{orders}}" wx:for-item="order" wx:key="">
+            <navigator url='/pages/orderdetail/orderdetail?id={{order.id}}'>
+                <view class='view-order-item' wx:for="{{order.items}}" wx:key="item">
+                    <image class='view-order-item-img' src='{{item.img}}' mode='aspectFill'></image>
+                    <view class='view-order-item-name'>{{item.name}}</view>
+                    <view class='view-order-item-price'>
+                        <view class='view-order-item-price-number'>￥{{item.price}}</view>
+                        <view class='view-order-item-number'>x{{item.qty}}</view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="view-order-total">
+                共1件商品，合计￥
+                <text class='view-order-total-number'>{{order.total}}</text> 元（含运费￥{{order.ship}} 元）
+            </view>
+            <view class="view-order-status">
+				<view class="view-order-status-time">{{ order.createTime }}</view>
+                <view>{{ order.statusText }}</view>
+            </view>
+            <view class='view-order-operations view-order-operations-flex-item'>
+                <view class='view-order-operations-flex-item'>
+                    <view data-id='{{order.id}}' data-btn='{{order.statusBtn}}' hidden='{{ order.statusBtn == "" }}' bindtap='{{order.statusBtn}}Tap' class='view-order-operations-item view-order-operations-status-btn'>
+                        {{ order.statusBtnText }}
+                    </view>
+                </view>
+				<view data-id='{{order.id}}' hidden='{{ order.statusBtn != "pay" }}' class='view-order-operations-item ' bindtap='do_cancel'>取消</view>
+                <view class='view-order-operations-flex-space'></view>
+                <view data-id='{{order.id}}' class='view-order-operations-item ' bindtap='do_delete'>删除</view>
+                <navigator class='view-order-operations-item ' url='/pages/logistics/logistics?id={{order.id}}'>物流</navigator>
+                <navigator class='view-order-operations-item ' url='/pages/evaluation/evaluation?id={{order.id}}'>评价</navigator>
+            </view>
+        </view>
+    </scroll-view>
 </view>

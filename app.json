@@ -23,7 +23,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "煌亿卫浴店",
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "white",
     "backgroundColor": "#eeeeee"
   },
   "tabBar": {

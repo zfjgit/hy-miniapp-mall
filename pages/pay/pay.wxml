@@ -4,7 +4,7 @@
       <image src="/images/pkg-1.png" class='view-order-receiver-icon'></image>
       <view class='view-order-receiver-detail'>
         <view class='view-order-receiver-name' wx:if="{{!addr}}">您还没有收货地址 o_o''</view>
-        <view class='view-order-receiver-name' wx:if="{{addr}}">收货人：{{ addr.name }} / {{ addr.mobile }}</view>
+        <view class='view-order-receiver-name' wx:if="{{addr}}">收货人：{{ addr.name }} {{ addr.name && addr.mobile ? '/' : '' }} {{ addr.mobile }}</view>
         <view class='view-order-receiver-addr' wx:if="{{addr}}">收货地址：{{ addr.province + '' + addr.city + addr.region }}</view>
       </view>
       <image src="/images/arrow-right.png" class='view-order-receiver-arrow'></image>
@@ -24,7 +24,7 @@
     <view class="view-order-total">
       <view class='view-order-msg'>
         <view class='view-order-msg-title'>买家留言：</view>
-        <input class='view-order-msg-content' value='{{ msg }}' placeholder='选填：填写内容已和卖家协商确认' maxlength='50'></input>
+        <input class='view-order-msg-content' value='{{ msg }}' placeholder='选填：填写内容已和卖家协商确认' maxlength='50' bindinput='msgInput'></input>
       </view>
       <view class='view-order-ship-money'>
         <view>运费</view>

@@ -149,5 +149,5 @@
   width: 200rpx;
   text-align: center;
   color: white;
-  background-color: #FD6D17;
+  background-color: red;
 }

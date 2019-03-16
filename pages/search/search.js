@@ -69,7 +69,7 @@ Page({
         if(d.result == 1 && d.data && d.data.length > 0) {
           for(var i = 0; i < d.data.length; i ++) {
             var p = d.data[i];
-            var img = p.small.replace('fs:', getApp().globalData.server + '/statics');
+			  var img = p.small.replace('fs:', getApp().globalData.statics);
             _this.data.searchResults.push({ id: p.goods_id, sales: p.buy_count, price: p.price, name: p.name, img: img });
           }
         }

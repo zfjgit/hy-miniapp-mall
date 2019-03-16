@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.2",
+	"libVersion": "2.6.2",
 	"appid": "wx7c407f9ee6e21b46",
 	"projectname": "hy-miniapp-mall",
 	"condition": {

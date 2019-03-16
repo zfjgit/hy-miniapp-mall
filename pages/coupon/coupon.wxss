@@ -88,3 +88,10 @@
   background-color: #ddd;
   border: dashed 1rpx #aaa;
 }
+
+.view-coupon-empty {
+	width: 100%;
+	text-align: center;
+	margin: 40rpx 0;
+	color: gray;
+}

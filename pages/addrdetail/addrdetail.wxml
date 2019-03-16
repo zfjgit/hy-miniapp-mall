@@ -51,6 +51,6 @@
   </view>
 
   <view class='view-addr-save'>
-    <button type="primary" size="default" form-type='submit' bindtap="saveAddr" class='view-addr-save-button'> 确定 </button>
+    <button type="button" size="default" form-type='submit' bindtap="saveAddr" class='view-addr-save-button'> 确定 </button>
   </view>
 </view>

@@ -21,4 +21,5 @@
       </view>
     </view>
   </scroll-view>
+  <view class="view-coupon-empty" hidden='{{ !isEmptyHintShow }}'>您还没有优惠券，赶快去领取吧~</view>
 </view>
