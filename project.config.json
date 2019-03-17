@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -88,11 +88,11 @@
 					"scene": "1001"
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "orderdetail",
 					"pathName": "pages/orderdetail/orderdetail",
-					"query": "",
-					"scene": "1001"
+					"query": "id=8",
+					"scene": 1001
 				},
 				{
 					"id": -1,

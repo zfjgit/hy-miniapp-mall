@@ -243,26 +243,28 @@ Page({
 		return total;
 	},
 	buyTap: function () {
-		var ids = [];
 		var nums = [];
+		var productIds = [];
+
 		var idNum = {};
 		this.data.products.forEach(function (item, idx) {
 			if (item.isBuySelected) {
-				idNum[item.id] = item.number;
-				ids.push(item.id);
 				nums.push(item.number);
+				productIds.push(item.pid);
+
+				idNum[item.pid] = item.number;
 			}
 		});
 		
-		var allIds = ids.join(',');
 		var allNums = nums.join(',');
+		var allProductIds = productIds.join(',');
 		
-		console.log('allIds=', allIds);
 		console.log('allNums=', allNums);
+		console.log('allProductIds=', allProductIds);
 		console.log('idNum=', JSON.stringify(idNum));
 
 		wx.navigateTo({
-			url: '/pages/pay/pay?ids=' + allIds + '&nums=' + allNums + '&idNum=' + JSON.stringify(idNum),
+			url: '/pages/pay/pay?ids=' + allProductIds + '&nums=' + allNums + '&idNum=' + JSON.stringify(idNum),
 		});
 	},
 	resetMode: function (mode) {
@@ -393,7 +395,7 @@ Page({
 					for (var i = 0; i < d.data.length; i++) {
 						var p = d.data[i];
 						_this.data.products.push({
-							itemId: p.id, id: p.goods_id, pid: p.product_id, name: p.name, storage: p.storage, number: p.num,
+							id: p.goods_id, itemId: p.id, pid: p.product_id, name: p.name, storage: p.storage, number: p.num,
 							img: p.image_default, price: p.price, isBuySelected: 0, isEditSelected: 0
 						});
 					}

@@ -221,8 +221,20 @@
   color: red;
 }
 .view-addtocart-product-sku{
-  padding: 10rpx;
-  border-bottom: solid 1rpx #eee;
+  padding: 20rpx 10rpx;
+  border-bottom: dotted 1rpx #eee;
+  border-top: dotted 1rpx #eee;
+  display: flex;
+  justify-content: flex-start;
+}
+.view-addtocart-product-sku-item{
+	border: solid 1rpx #eee;
+	padding: 15rpx 20rpx;
+	border-radius: 10rpx;
+	margin-right: 20rpx;
+}
+.view-addtocart-product-sku-item-selected{
+	border: solid 1rpx red;
 }
 .view-addtocart-product-number-view {
   height: 60rpx;

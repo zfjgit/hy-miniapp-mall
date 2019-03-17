@@ -69,15 +69,14 @@ Page({
 							console.log('requestPayment.res=', res.errMsg);
 							if (res.errMsg == 'requestPayment:ok') {
 								wx.showToast({
-									title: '订单支付成功',
+									title: '已支付，正在确认支付状态',
+									icon: 'none',
 									success: function () {
-										wx.redirectTo({
-											url: '/pages/order/order',
-										});
+										
 									}
 								});
 
-								//paymentSuccess(data.order_id);
+								paymentSuccess(data.order_id);
 							}
 						},
 						fail: function() {
@@ -104,15 +103,15 @@ Page({
 
 	paymentSuccess: function(orderId) {
 		wx.request({
-			url: getApp().globalData.server + '/api/shop/order/payment-success.do',
-			data: { orderId: orderId },
+			url: getApp().globalData.server + '/api/shop/payment/get-pay-status-for-wechat.do',
+			data: { orderId: orderId, pluginId: 'weixinPayPlugin' },
 			success: function(res) {
 				var r = res.data;
 				console.log('paymentSuccess.res=', r);
 
 				if(r && r.result == 1) {
 					wx.showToast({
-						title: '订单状态确认成功',
+						title: '订单支付成功',
 						success: function() {
 							wx.redirectTo({
 								url: '/pages/order/order',
@@ -121,17 +120,14 @@ Page({
 					})
 				}
 			}
-		})
+		});
+		setTimeout(this.paymentSuccess, 3000);
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		wx.showLoading({
-			mask: true
-		});
-
 		var productIds = options.ids.split(',');
 
 		console.log('productIds=', options.ids);
@@ -224,11 +220,11 @@ Page({
 				if (d.result == 1 && d.data) {
 					d.data.forEach(function (item, i) {
 						if (item) {
-							var qty = parseInt(_this.data.idNum[item.goods_id]);
+							var qty = parseInt(_this.data.idNum[item.product_id]);
 
 							var img = item.small ? item.small.replace('fs:', getApp().globalData.statics) : '';
 							
-							_this.data.products.push({ id: item.goods_id, name: item.name, img: img, price: item.price.toFixed(2), qty: qty });
+							_this.data.products.push({ id: item.product_id, name: item.name, img: img, price: item.price.toFixed(2), qty: qty });
 
 							_this.data.count += qty;
 							_this.data.total += item.price * qty;

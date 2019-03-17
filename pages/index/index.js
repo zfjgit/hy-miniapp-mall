@@ -180,6 +180,8 @@ Page({
 			
 			success: function (res) {
 				var r = res.data;
+				console.log('getCategoryGoods.data=', r);
+
 				if (r && r.result == 1) {
 					var categoryGoods = [];
 					for (var i = 0; i < r.data.length; i++) {
