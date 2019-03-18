@@ -45,7 +45,7 @@ Page({
 			return;
 		}
 
-		wx.showLoading({ mask: true });
+		wx.showLoading({ title: '正在创建订单', mask: true });
 
 		wx.request({
 			method: 'POST',
@@ -58,6 +58,9 @@ Page({
 
 				if(r.data && r.result == 1) {
 					var data = r.data;
+					page.setData({orderId: data.order_id});
+
+					wx.showLoading({ title: '正在发起支付', mask: true });
 
 					wx.requestPayment({
 						timeStamp: data.params.timeStamp,
@@ -68,15 +71,7 @@ Page({
 						success: function(res) {
 							console.log('requestPayment.res=', res.errMsg);
 							if (res.errMsg == 'requestPayment:ok') {
-								wx.showToast({
-									title: '已支付，正在确认支付状态',
-									icon: 'none',
-									success: function () {
-										
-									}
-								});
-
-								paymentSuccess(data.order_id);
+								page.paymentSuccess();
 							}
 						},
 						fail: function() {
@@ -84,7 +79,7 @@ Page({
 								url: '/pages/order/order',
 							});
 						},
-						complete: function() {
+						complete: function () {
 							wx.hideLoading();
 						}
 					});
@@ -101,15 +96,29 @@ Page({
 		});
 	},
 
-	paymentSuccess: function(orderId) {
+	paymentSuccess: function() {
+		var page = this;
+
+		var orderId = this.data.orderId;
+		if (!orderId) {
+			return;
+		}
+
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+		}
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/payment/get-pay-status-for-wechat.do',
 			data: { orderId: orderId, pluginId: 'weixinPayPlugin' },
+			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
 			success: function(res) {
 				var r = res.data;
 				console.log('paymentSuccess.res=', r);
 
 				if(r && r.result == 1) {
+					clearTimeout(page.data.t);
+
 					wx.showToast({
 						title: '订单支付成功',
 						success: function() {
@@ -117,11 +126,16 @@ Page({
 								url: '/pages/order/order',
 							});
 						}
-					})
+					});
 				}
+			},
+			complete: function () {
+				wx.hideLoading();
 			}
 		});
-		setTimeout(this.paymentSuccess, 3000);
+
+		var t = setTimeout(page.paymentSuccess, 3000);
+		this.setData({t: t});
 	},
 
 	/**
@@ -211,10 +225,11 @@ Page({
 		wx.request({
 			method: 'POST',
 			data: { ids: productIds },
-			url: getApp().globalData.server + '/api/shop/goods/list-goods.do',
+			url: getApp().globalData.server + '/api/shop/goods/list-products.do',
 			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
 			success: function (res) {
 				var d = res.data;
+				console.log('getProducts.data=', d);
 
 				_this.data.products = [];
 				if (d.result == 1 && d.data) {
@@ -257,14 +272,22 @@ Page({
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-
+		console.log('onUnload');
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+			this.setData({ t: '' });
+		}
 	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function () {
-
+		console.log('onUnload');
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+		}
+		this.setData({ t: '' });
 	},
 
 	/**

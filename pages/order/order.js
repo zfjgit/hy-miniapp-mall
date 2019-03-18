@@ -292,6 +292,13 @@ Page({
 
 		console.log('do_pay.id=', id);
 
+		this.setData({ orderId: id });
+
+		wx.showLoading({
+			title: '正在发起支付',
+			mask: true
+		});
+
 		wx.request({
 			url: app.globalData.server + '/api/shop/order/wxpay.do',
 			data: { orderId: id },
@@ -301,9 +308,15 @@ Page({
 			success: function (res) {
 				var r = res.data;
 				if(r && r.result == 1 && r.data) {
+					var data = r.data;
 					var params = r.data.params;
 
-					console.log('params=', params);
+					console.log('do_pay.params=', params);
+
+					wx.showLoading({
+						title: '正在发起支付',
+						mask: true
+					});
 
 					wx.requestPayment({
 						timeStamp: params.timeStamp,
@@ -312,23 +325,74 @@ Page({
 						signType: params.signType,
 						paySign: params.paySign,
 						success: function(res) {
-							wx.showToast({
-								title: '支付成功',
-								success: function() {
-									page.getOrders();
-								}
-							})
+							console.log('requestPayment.res=', res.errMsg);
+							if (res.errMsg == 'requestPayment:ok') {
+								page.paymentSuccess(id);
+							}
 						},
-						fail: function() {
-							wx.showToast({
-								title: '您已取消支付',
-								icon: 'none'
-							})
+						fail: function(res) {
+							console.log('fail.res=', res.data);
+
+							page.paymentSuccess();
+						},
+						complete: function () {
+							wx.hideLoading();
 						}
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
+	},
+
+	paymentSuccess: function () {
+		var page = this;
+
+		console.log('t=', !this.data.t);
+		if(!this.data.t) {
+			console.log('wx.show');
+			wx.showLoading({
+				title: '查询支付状态',
+				mask: true
+			});
+		}
+
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+		}
+
+		var orderId = this.data.orderId;
+		if(!orderId) {
+			return;
+		}
+
+		wx.request({
+			url: getApp().globalData.server + '/api/shop/payment/get-pay-status-for-wechat.do',
+			data: { orderId: orderId, pluginId: 'weixinPayPlugin' },
+			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
+			success: function (res) {
+				var r = res.data;
+				console.log('paymentSuccess.res=', r);
+
+				if (r && r.result == 1) {
+					wx.showToast({
+						title: '订单支付成功',
+						success: function () {
+						}
+					});
+					clearTimeout(page.data.t);
+					page.getOrders();
+				}
+			},
+			complete: function () {
+				wx.hideLoading();
+			}
+		});
+
+		var t = setTimeout(page.paymentSuccess, 3000);
+		this.setData({t: t});
 	},
 
 	do_confirm: function (id) {
@@ -418,14 +482,22 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+		console.log('onHide');
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+		}
+		this.setData({ t: '' });
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+		console.log('onUnload');
+		if (this.data.t) {
+			clearTimeout(this.data.t);
+		}
+		this.setData({ t: '' });
     },
 
     /**
