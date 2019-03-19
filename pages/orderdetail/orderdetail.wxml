@@ -1,81 +1,103 @@
 <view class="container">
-  <view class='view-order-status'>
-    <image src='/images/pkg-4.png' class='view-order-status-img' mode='aspectFill'></image>
-    <view class='view-order-status-name'>{{order.status.name}}</view>
-  </view>
-
-  <navigator class='view-order-logistics' url='/pages/logistics/logistics'>
-    <view class='view-order-logistics-left'>
-      <image src="/images/wl-1.png" class='view-order-logistics-icon'></image>
-      <view class='view-order-logistics-detail'>
-        <view class='view-order-logistics-last'>【已签收，签收人：张三】</view>
-        <view class='view-order-logistics-time'>2018-01-20 12:21:34</view>
-      </view>
+    <view class='view-order-status'>
+        <image src='/images/pkg-4.png' class='view-order-status-img' mode='aspectFill'></image>
+        <view class='view-order-status-name'>{{order.status.name}}</view>
     </view>
-    <view class='view-order-logistics-more'>
-      <image src="/images/arrow-right.png" class='class-right-arrrow-img'></image>
+
+	<view wx:if="{{ order.shipNo }}" style='width:100%;'>
+		<navigator class='view-order-logistics' url='/pages/logistics/logistics?shipNo={{ order.shipNo }}&shipType={{ order.shipType }}&img={{order.orderImg}}&status={{ order.orderStatus}}&addr={{ order.shipAddr }}'>
+			<view class='view-order-logistics-left'>
+				<image src="/images/wl-1.png" class='view-order-logistics-icon'></image>
+				<view class='view-order-logistics-detail'>
+					<view class='view-order-logistics-last'>{{ order.payStatus + ' / ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
+					<view class='view-order-logistics-time'>{{ order.shipTime }}</view>
+				</view>
+			</view>
+			<view class='view-order-logistics-more'>
+				<image src="/images/arrow-right.png" class='class-right-arrrow-img'></image>
+			</view>
+		</navigator>
+	</view>
+	<view wx:if="{{ !order.shipNo }}" style='width:100%;'>
+		<view class='view-order-logistics' >
+			<view class='view-order-logistics-left'>
+				<image src="/images/wl-1.png" class='view-order-logistics-icon'></image>
+				<view class='view-order-logistics-detail'>
+					<view class='view-order-logistics-last'>{{ order.payStatus + ' / ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
+					<view class='view-order-logistics-time'>{{ order.shipTime }}</view>
+				</view>
+			</view>
+			<view class='view-order-logistics-more'>
+				
+			</view>
+		</view>
+	</view>
+
+    <view class='view-order-receiver'>
+        <image src="/images/pkg-1.png" class='view-order-logistics-icon'></image>
+        <view class='view-order-receiver-detail'>
+            <view class='view-order-receiver-name'>收货人：{{ order.shipName }}，电话：{{ order.shipMobile }}</view>
+            <view class='view-order-receiver-addr'>收货地址：{{ order.shipAddr }}</view>
+        </view>
     </view>
-  </navigator>
 
-  <view class='view-order-receiver'>
-    <image src="/images/pkg-1.png" class='view-order-logistics-icon'></image>
-    <view class='view-order-receiver-detail'>
-      <view class='view-order-receiver-name'>收货人：张三</view>
-      <view class='view-order-receiver-addr'>收货地址：广东省 深圳市 福田区 沙头街道 5巷1号</view>
+    <view class='view-order-products'>
+        <navigator class='view-order-item' wx:for="{{order.items}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
+            <image class='view-order-item-img' src='{{item.img}}' mode='aspectFill'></image>
+            <view class='view-order-item-name'>{{item.name}}</view>
+            <view class='view-order-item-price'>
+                <view class='view-order-item-price-number'>￥{{item.price}}</view>
+                <view class='view-order-item-number'>x{{item.qty}}</view>
+            </view>
+        </navigator>
     </view>
-  </view>
 
-  <view class='view-order-products'>
-    <navigator class='view-order-item' wx:for="{{order.items}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
-      <image class='view-order-item-img' src='{{item.img}}' mode='aspectFill'></image>
-      <view class='view-order-item-name'>{{item.name}}</view>
-      <view class='view-order-item-price'>
-        <view class='view-order-item-price-number'>￥{{item.price}}</view>
-        <view class='view-order-item-number'>x{{item.qty}}</view>
-      </view>
-    </navigator>
-  </view>
-
-  <view class="view-order-total">
-    <view class='view-order-ship-money'>
-      <view>运费</view>
-      <view>￥<text>0.00</text></view>
+    <view class="view-order-total">
+        <view class='view-order-ship-money'>
+            <view>运费</view>
+            <view>￥
+                <text>{{ order.shipAmount }}</text>
+            </view>
+        </view>
+        <view class='view-order-total-money'>
+            <view>实付款（含运费）</view>
+            <view class='view-order-total-money-text'>￥
+                <text class='view-order-total-money-number'>{{ order.total }}</text>
+            </view>
+        </view>
     </view>
-    <view class='view-order-total-money'>
-      <view>实付款（含运费）</view>
-      <view class='view-order-total-money-text'>￥<text class='view-order-total-money-number'>1320.00</text></view>
+
+    <view class='view-order-contact'>
+        <button session-from="weapp" class='view-order-contact-button' open-type='contact'>
+            <image src="/images/kefu.png" class='view-order-contact-button-img' mode='aspectFill'></image>
+            <text class='view-order-contact-button-title'>联系客服</text>
+        </button>
     </view>
-  </view>
 
-  <view class='view-order-contact'>
-    <button session-from="weapp" class='view-order-contact-button' open-type='contact'>
-      <image src="/images/kefu.png" class='view-order-contact-button-img' mode='aspectFill'></image>
-      <text class='view-order-contact-button-title' >联系客服</text>
-    </button>
-  </view>
-
-  <view class='view-order-times'>
-    <view class='view-order-code'>订单编号：{{order.code}}</view>
-    <view>创建时间：{{order.createTime}}</view>
-    <view>付款时间：{{order.payTime}}</view>
-    <view>发货时间：{{order.shipTime}}</view>
-    <view>收货时间：{{order.receivTime}}</view>
-  </view>
-
-  <view class='view-order-recommend-products'>
-    <view class="view-order-recommend-products-title">您可能还喜欢</view>
-    <view class='view-order-recommend-products-list'>
-      <navigator class='view-order-recommend-product' wx:for="{{recommendProducts}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
-        <image class='view-order-recommend-product-img' src='{{item.img}}' mode='scaleToFill'></image>
-        <view class='view-order-recommend-product-name'>{{item.name}}</view>
-        <view class='view-order-recommend-product-price'>￥<text class='view-order-recommend-product-price-number'>{{item.price}}</text></view>
-      </navigator>
+    <view class='view-order-times'>
+        <view class='view-order-code'>订单编号：{{order.code}}</view>
+        <view>创建时间：{{order.createTime}}</view>
+        <view>付款时间：{{order.payTime}}</view>
+        <view>发货时间：{{order.shipTime}}</view>
+        <view>收货时间：{{order.receivTime}}</view>
     </view>
-  </view>
 
-  <view class='view-order-operations'>
-    <view class='view-order-operations-item' bindtap='delTap'>删除订单</view>
-    <navigator class='view-order-operations-item' url='/pages/logistics/logistics'>查看物流</navigator>
-    <navigator class='view-order-operations-item' url='/pages/evaluation/evaluation?id={{item.id}}'>评价</navigator>
-  </view>
+    <view class='view-order-recommend-products'>
+        <view class="view-order-recommend-products-title">您可能还喜欢</view>
+        <view class='view-order-recommend-products-list'>
+            <navigator class='view-order-recommend-product' wx:for="{{recommendProducts}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
+                <image class='view-order-recommend-product-img' src='{{item.img}}' mode='scaleToFill'></image>
+                <view class='view-order-recommend-product-name'>{{item.name}}</view>
+                <view class='view-order-recommend-product-price'>￥
+                    <text class='view-order-recommend-product-price-number'>{{item.price}}</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+
+    <view class='view-order-operations'>
+        <view class='view-order-operations-item' bindtap='delTap'>删除订单</view>
+        <navigator class='view-order-operations-item' url='/pages/logistics/logistics?shipNo={{order.shipNo}}' hidden='{{ order.status < 3 || !order.shipNo }}'>查看物流</navigator>
+        <navigator class='view-order-operations-item' url='/pages/evaluation/evaluation?id={{order.id}}' hidden='{{ order.status != 5}}'>评价</navigator>
+    </view>
 </view>

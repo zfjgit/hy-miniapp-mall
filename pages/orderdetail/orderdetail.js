@@ -1,3 +1,4 @@
+var util = require('../../utils/util.js');
 Page({
 
     /**
@@ -16,6 +17,16 @@ Page({
             shipTime: '2018-01-03 15:12:13',
             receivTime: '2018-01-05 19:45:35',
             total: 2123.00,
+			shipAmount: 10,
+			orderStatus: '已付款',
+			payStatus: '已付款',
+			shipStatus: '已发货',
+			shipAddr: '北京市朝阳区XX路XX小区XX',
+			shipName: '小李',
+			shipMobile: '13022223333',
+			shipNo: '1656544988',
+			shipType: '顺丰',
+			orderImg: '',
             items: [{
                     id: 1,
                     name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
@@ -61,26 +72,40 @@ Page({
 
     delTap: function(e) {
         var _this = this;
+
         var idx = e.currentTarget.dataset.idx;
-        wx.showModal({
-            title: '确认',
-            content: '确定要删除这个订单？',
-            success: function(res) {
-                if (res.confirm) {
-                    wx.showModal({
-                        showCancel: false,
-                        title: '提示',
-                        content: '订单已删除',
-                        success: function(res) {
-                            wx.navigateBack({});
-                        }
-                    });
-                }
-            }
-        });
+
+		wx.showModal({
+			title: '确认',
+			content: '确定要删除这个订单？',
+			success: function (res) {
+				if (res.confirm) {
+					wx.request({
+						url: app.globalData.server + '/api/shop/order/delete.do',
+						data: { order_id: id, reson: '客户在小程序端点击删除' },
+						header: {
+							'cookie': wx.getStorageSync("sessionid")
+						},
+						success: function (res) {
+							var r = res.data;
+							if (r && r.result == 1) {
+								wx.showToast({
+									title: '删除成功',
+									success: function () {
+										wx.navigateBack({});
+									}
+								})
+							}
+						}
+					})
+				}
+			}
+		});
     },
 
 	getOrder: function(id) {
+		var page = this;
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/order/wxgetorder.do',
 			data: {
@@ -94,7 +119,7 @@ Page({
 				console.log('getOrder.res=', d);
 
 				if (d && d.result == 1 && d.data) {
-
+					page.parseOrderData(d.data);
 				} else {
 					console.log('没有获取到订单信息')
 					wx.navigateBack({
@@ -102,7 +127,79 @@ Page({
 					})
 				}
 			}
-		})
+		});
+	},
+
+	parseOrderData: function(order) {
+		var dt = new Date();
+		dt.setTime(order.create_time * 1000);
+		
+		var createTime = util.formatTime(dt);
+		var payTime = '';
+		if(order.status == 2) {
+			payTime = createTime;
+		}
+		var shipTime = createTime;
+		if(order.status == 3 && order.ship_time) {
+			dt.setTime(parseInt(order.ship_time) * 1000);
+			shipTime = util.formatTime(dt);
+		}
+		var receivTime = '';
+		if (order.status == 4 && order.signing_time) {
+			dt.setTime(order.signing_time * 1000);
+			receivTime = util.formatTime(dt);
+		}
+
+		console.log('createTime=', createTime);
+		console.log('shipTime=', shipTime);
+		console.log('receivTime=', receivTime);
+
+		var orderImg = '';
+		var catIds = [];
+		var items = [];
+		if(order.itemList) {
+			order.itemList.forEach(function(item, i) {
+				items.push({ 
+					id: item.goods_id,
+					name: item.name,
+					price: item.price,
+					img: item.image,
+					qty: item.num
+				});
+				if(item.image) {
+					orderImg = item.image;
+				}
+				catIds.push(item.cat_id);
+			});
+		}
+
+		this.data.order = {
+			id: order.order_id,
+			code: order.sn,
+			status: { code: order.status, name: order.orderStatus },
+			orderStatus: order.orderStatus,
+			createTime: createTime,
+			payTime: payTime,
+			shipTime: shipTime,
+			receivTime: receivTime,
+			total: order.order_amount,
+			shipAmount: order.shipping_amount,
+			shipName: order.ship_name,
+			shipAddr: order.ship_addr,
+			shipMobile: order.ship_mobile,
+			shipNo: order.ship_no,
+			shipType: order.shipping_type,
+			shipStatus: order.shipStatus,
+			payStatus: order.payStatus,
+			items: items,
+			orderImg: orderImg
+		}
+
+
+
+		this.setData({ order: this.data.order });
+
+		this.getRelatedGoods(catIds);
 	},
 
     /**
@@ -116,12 +213,46 @@ Page({
 		if(!id) {
 			console.log('没有获取到订单ID')
 			wx.navigateBack({
-				
 			});
 		}
 
 		this.getOrder(id);
     },
+
+	getRelatedGoods: function (catIds) {
+		var page = this;
+
+		wx.request({
+			url: getApp().globalData.server + '/api/shop/goods/get-category-goods.do',
+			data: {
+				catIds: catIds.join(',')
+			},
+			header: {
+				'cookie': wx.getStorageSync("sessionid")
+			},
+			success: function (res) {
+				var d = res.data;
+				console.log('getRelatedGoods.res=', d);
+
+				if (d && d.result == 1 && d.data) {
+					var cats = d.data;
+					if(cats) {
+						var relatedGoods = [];
+						cats.forEach(function(citem, i){
+							var goods = citem.products;
+							if(goods) {
+								goods.forEach(function(item, i){
+									relatedGoods.push({ id: item.goods_id, name: item.name, price: item.price, img: item.small });
+								});
+							}
+						});
+
+						page.setData({ recommendProducts: relatedGoods });
+					}
+				}
+			}
+		})
+	},
 
     /**
      * 生命周期函数--监听页面初次渲染完成

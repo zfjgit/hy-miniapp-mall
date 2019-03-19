@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -91,7 +91,7 @@
 					"id": 8,
 					"name": "orderdetail",
 					"pathName": "pages/orderdetail/orderdetail",
-					"query": "id=8",
+					"query": "id=39",
 					"scene": 1001
 				},
 				{
@@ -123,11 +123,11 @@
 					"scene": "1001"
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "evaluation",
 					"pathName": "pages/evaluation/evaluation",
-					"query": "",
-					"scene": "1001"
+					"query": "orderId=39",
+					"scene": 1001
 				},
 				{
 					"id": 14,

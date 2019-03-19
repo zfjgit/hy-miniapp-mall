@@ -79,6 +79,7 @@ Page({
                 statusText: '待付款，请尽快支付',
                 statusBtnText: '付款',
                 statusBtn: 'pay',
+				shipNo: '454654322112',
                 items: [{
                         name: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
                         price: 182.00,
@@ -102,6 +103,7 @@ Page({
                 statusText: '订单未付款，请尽快支付',
                 statusBtnText: '付款',
                 statusBtn: 'pay',
+				shipNo: '454654322112',
                 items: [{
                         name: '复古镀金洗手盆龙头1232A 领券参加优惠促销 领券参加优惠促销活动',
                         price: 355.00,
@@ -126,8 +128,6 @@ Page({
 
         selectedType: 'all',
     },
-
-    
 
     typeTap: function(e) {
         var type = e.currentTarget.dataset.code;
@@ -204,6 +204,7 @@ Page({
                                 statusText: statusText,
                                 statusBtnText: statusBtnText,
                                 statusBtn: statusBtn,
+								shipNo: order.ship_no
                             }
 
                             orderList.push(orderData);

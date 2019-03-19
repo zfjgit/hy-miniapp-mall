@@ -6,6 +6,14 @@
   justify-content: flex-start;
   background-color: #fff;
 }
+.view-order-right {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	height: 120rpx;
+	margin-left: 10rpx;
+}
 .view-order-logistics-status {
   color: #FD6D17;
 }

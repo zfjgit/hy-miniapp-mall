@@ -1,35 +1,37 @@
 <view class='container'>
-  <scroll-view scroll-y>
-    <view class='view-order'>
-      <image src='{{order.img}}' class='view-order-img'></image>
-      <view>
-        <view class='view-order-logistics-status'>{{order.logisticsStatus.name}}</view>
-        <view>{{order.logisticsCompany.name}} {{order.logisticsCode}}</view>
-        <view>官方电话：{{order.logisticsCompany.tel}}</view>
-      </view>
-    </view>
+    <scroll-view scroll-y>
+        <view class='view-order'>
+            <image src='{{ productImg }}' class='view-order-img'></image>
+            <view class='view-order-right'>
+                <view class='view-order-logistics-status'>{{ orderStatus }}</view>
+                <view>{{ shipType + ' ' + shipNo }}</view>
+            </view>
+        </view>
 
-    <view class='view-order-logistics-nodes'>
-      <view class='view-order-addr'>
-        <view class='view-order-addr-icon'>
-          <image src='/images/ico-addr.png' class='view-order-addr-icon-img'></image>
-        </view>
-        <view class=''>【收货地址】{{order.addr.fullAddress}}</view>
-      </view>
+		<view class='view-order-logistics-nodes'>
+			<web-view bindload='bindload' binderror='binderror' src="https://m.kuaidi100.com/index_all.html?type={{shipType}}&postid={{shipNo}}"></web-view>
+		</view>
+        <view class='view-order-logistics-nodes' hidden='yes'>
+            <view class='view-order-addr'>
+                <view class='view-order-addr-icon'>
+                    <image src='/images/ico-addr.png' class='view-order-addr-icon-img'></image>
+                </view>
+                <view class=''>【收货地址】{{ address }}</view>
+            </view>
 
-      <view class='view-logistics-node' wx:for="{{nodes}}" wx:key="item">
-        <view class='view-node-left'>
-          <view class='view-node-left-datetime {{index == 0 ? "color-yellow" : ""}}'>
-            <view class='view-node-date'>{{item.date}}</view>
-            <view class='view-node-time'>{{item.time}}</view>
-          </view>
-          <image class='view-node-left-icon' src="{{index == 0 ? '/images/node-3.png' : '/images/node-4.png'}}"></image>
+            <view class='view-logistics-node' wx:for="{{nodes}}" wx:key="item">
+                <view class='view-node-left'>
+                    <view class='view-node-left-datetime {{index == 0 ? "color-yellow" : ""}}'>
+                        <view class='view-node-date'>{{item.date}}</view>
+                        <view class='view-node-time'>{{item.time}}</view>
+                    </view>
+                    <image class='view-node-left-icon' src="{{index == 0 ? '/images/node-3.png' : '/images/node-4.png'}}"></image>
+                </view>
+                <view class='view-node-right {{index == 0 ? "color-yellow" : ""}}'>
+                    <view>{{item.status}}</view>
+                    <view>{{item.name}}</view>
+                </view>
+            </view>
         </view>
-        <view class='view-node-right {{index == 0 ? "color-yellow" : ""}}'>
-          <view>{{item.status}}</view>
-          <view>{{item.name}}</view>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
+    </scroll-view>
 </view>
