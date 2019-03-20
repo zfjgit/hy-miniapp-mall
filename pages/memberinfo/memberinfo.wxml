@@ -1,0 +1,80 @@
+<view class='view-item' url='/pages/addr/addr'>
+    <view class='view-item-title'>
+        {{uname}}
+    </view>
+    <view class='view-item-link'>
+        
+    </view>
+</view>
+<view class='view-item' url='/pages/addr/addr'>
+    <view class='view-item-title'>
+        {{lvname}}
+    </view>
+    <view class='view-item-link'>
+        
+    </view>
+</view>
+
+<view class='view-item'>
+    <view class='view-item-title'>
+        <image class='view-item-icon' src="{{avatar}}" mode='aspectFit' style='width:80rpx;height:80rpx;border-radius:20rpx;'></image>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-item' url='/pages/addr/addr'>
+    <view class='view-item-title'>
+        <input value='{{name}}' bindinput='nameInput'></input>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-item' url='/pages/coupon/coupon'>
+    <view class='view-item-title'>
+        <input value='{{mobile}}' bindinput='mobileInput' type='number'></input>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-item' url='/pages/coupon/coupon'>
+    <view class='view-item-title'>
+        <picker mode="selector" bindchange="bindPickGenderChange" value="{{gender}}" range="{{genders}}">
+            <view class="picker">
+                {{genders[gender]}}
+            </view>
+        </picker>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-item' url='/pages/coupon/coupon'>
+    <view class='view-item-title'>
+        <picker mode="date" value="{{birdthday}}" end="2019-03-01" bindchange="bindDateChange">
+            <view class="picker">
+                {{birdthday}}
+            </view>
+        </picker>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-item' url='/pages/coupon/coupon'>
+    <view class='view-item-title'>
+        <picker mode="region" bindchange="bindRegionChange" value="{{regionValue}}" custom-item="{{customItem}}">
+            <view class="picker">
+                {{province}} {{city}} {{region}}
+            </view>
+        </picker>
+    </view>
+    <view class='view-item-link'>
+        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+    </view>
+</view>
+<view class='view-addr-save'>
+    <button type="button" size="default" form-type='submit' bindtap="save" class='view-addr-save-button'> 保 存 </button>
+</view>

@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -135,6 +135,13 @@
 					"pathName": "pages/pay/pay",
 					"query": "ids=286,301&nums=1,3",
 					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "info",
+					"pathName": "pages/memberinfo/memberinfo",
+					"query": "id=5",
+					"scene": null
 				}
 			]
 		}

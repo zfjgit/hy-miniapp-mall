@@ -1,47 +1,110 @@
 <view class="container">
-  <view class="view-head">
-    <view class='view-head-view'>
-      <image class='view-head-img' src='{{customer.headimg == "" ? defaultHeadImg : customer.headimg }}' mode='aspectFill'></image>
-    </view>
-    <view class='view-head-name'>
-      {{customer.name}}
-    </view>
-  </view>
+    <navigator class="view-head" url='/pages/memberinfo/memberinfo'>
+        <view class='view-head-view'>
+            <image class='view-head-img' src='{{customer.headimg == "" ? defaultHeadImg : customer.headimg }}' mode='aspectFill'></image>
+        </view>
+        <view class='view-head-name'>
+            {{customer.name}}
+        </view>
+    </navigator>
 
-  <view class='view-main'>
-    <view class='view-main-balance'>
-      <view class='view-balance'>余额￥：<text class='view-balance-number'>{{customer.balance}}</text></view>
-      <view class='view-score'>积分：<text class='view-score-number'>{{customer.score}}</text></view>
-      <view class='view-coupons'>优惠券：<text class='view-coupons-number'>{{customer.coupons}}</text></view>
+    <view class='view-main'>
+        <view class='view-main-balance'>
+            <view class='view-balance'>余额￥：
+                <text class='view-balance-number'>{{customer.balance}}</text>
+            </view>
+            <view class='view-score'>积分：
+                <text class='view-score-number'>{{customer.score}}</text>
+            </view>
+            <view class='view-coupons'>优惠券：
+                <text class='view-coupons-number'>{{customer.coupons}}</text>
+            </view>
+        </view>
+        <navigator class='view-item' url='/pages/order/order'>
+            <image class='view-item-icon' src="/images/no-order.png" mode='aspectFit'></image>
+            <view class='view-item-title'>我的订单</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </navigator>
+        <navigator class='view-item' url='/pages/addr/addr'>
+            <image class='view-item-icon' src="/images/ico-addr.png" mode='aspectFit'></image>
+            <view class='view-item-title'>收货地址</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </navigator>
+        <navigator class='view-item' url='/pages/coupon/coupon'>
+            <image class='view-item-icon' src="/images/star-1.png" mode='aspectFit'></image>
+            <view class='view-item-title'>优惠券</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </navigator>
+
+        <view class='view-item' bindtap='showChangePwd'>
+            <image class='view-item-icon' src="/images/gou.png" mode='aspectFit'></image>
+            <view class='view-item-title'>修改密码</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </view>
+
+		<view class='view-item' bindtap='showBindAccount'>
+            <image class='view-item-icon' src="/images/addr-edit.png" mode='aspectFit'></image>
+            <view class='view-item-title'>绑定已注册账号</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </view>
+
+        <navigator class='view-item' url='/pages/aboutus/aboutus'>
+            <image class='view-item-icon' src="/images/nav/my-off.png" mode='aspectFit'></image>
+            <view class='view-item-title'>关于我们</view>
+            <view class='view-item-link'>
+                <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
+            </view>
+        </navigator>
+
     </view>
-    <navigator class='view-item' url='/pages/order/order'>
-      <image class='view-item-icon' src="/images/nav/order-on.png" mode='aspectFit'></image>
-      <view class='view-item-title'>我的订单</view>
-      <view class='view-item-link'>
-        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
-      </view>
-    </navigator>
-    <navigator class='view-item' url='/pages/addr/addr'>
-      <image class='view-item-icon' src="/images/ico-addr.png" mode='aspectFit'></image>
-      <view class='view-item-title'>收货地址</view>
-      <view class='view-item-link'>
-        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
-      </view>
-    </navigator>
-    <navigator class='view-item' url='/pages/coupon/coupon'>
-      <image class='view-item-icon' src="/images/gou-red.png" mode='aspectFit'></image>
-      <view class='view-item-title'>优惠券</view>
-      <view class='view-item-link'>
-        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
-      </view>
-    </navigator>
-    <navigator class='view-item' url='/pages/aboutus/aboutus'>
-      <image class='view-item-icon' src="/images/nav/my-off.png" mode='aspectFit'></image>
-      <view class='view-item-title'>关于我们</view>
-      <view class='view-item-link'>
-        <image src='/images/arrow-right.png' class="class-right-arrrow-img"></image>
-      </view>
-    </navigator>
-    
-  </view>
+
+    <view class='view-bind-account-cover' hidden='{{ !isShowBindAccountView }}'>
+        <view class="view-bind-account">
+            <view class="view-bind-account-title">绑定已注册账号密码</view>
+            <view class="view-bind-account-account">
+                <view>账号：</view>
+                <input placeholder="请输入已注册的账号" bindinput='bindAccountTap' maxlength='30' />
+            </view>
+            <view class="view-bind-account-password">
+                <view>密码：</view>
+                <input placeholder="请输入密码" password='true' bindinput="bindPwdTap" maxlength='20'/>
+            </view>
+			<view class='view-bind-account-button'>
+				<button bindtap='cancelBindAccount' size='mini' style='margin-right:40rpx;'>取消</button>
+				<button bindtap='confirmBindAccount' type='default' size='mini' style='background-color: #FD6D17;color:white;'>确定</button>
+			</view>
+        </view>
+    </view>
+
+	<view class='view-bind-account-cover' hidden='{{ !isShowChangePwdView }}'>
+        <view class="view-bind-account" style='height: 450rpx;'>
+            <view class="view-bind-account-title">修改密码</view>
+			<view class="view-bind-account-oldpassword">
+                <view class="view-bind-account-field-title">原密码：</view>
+                <input placeholder="请输入原密码" password='true' bindinput="changePwd0Tap" maxlength='20'/>
+            </view>
+            <view class="view-bind-account-password">
+                <view class="view-bind-account-field-title">新密码：</view>
+                <input placeholder="请输入密码" password='true' bindinput="changePwd1Tap" maxlength='20'/>
+            </view>
+			<view class="view-bind-account-password">
+                <view class="view-bind-account-field-title">确认密码：</view>
+                <input placeholder="请再次输入密码" password='true' bindinput="changePwd2Tap" maxlength='20'/>
+            </view>
+			<view class='view-bind-account-button'>
+				<button bindtap='cancelChangePwd' size='mini' style='margin-right:40rpx;'>取消</button>
+				<button bindtap='confirmChangePwd' type='default' size='mini' style='background-color: #FD6D17;color:white;'>确定</button>
+			</view>
+        </view>
+    </view>
 </view>

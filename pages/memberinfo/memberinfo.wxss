@@ -1,0 +1,17 @@
+/* pages/memberinfo/memberinfo.wxss */
+
+.view-addr-save-button {
+  width: 90%;
+  text-align: center;
+  padding: 0rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #FD6D17;
+  color: white;
+  border-radius: 10rpx;
+  margin-top: 40rpx;
+}
+.view-item {
+	border-bottom: solid 1rpx #eee;
+	font-size: 13px;
+}

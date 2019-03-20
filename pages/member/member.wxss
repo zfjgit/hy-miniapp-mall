@@ -60,3 +60,90 @@
   width: 100%;
 }
 
+.view-bind-account-cover {
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	position: absolute;
+	z-index: 100;
+}
+.view-bind-account {
+	z-index: 10;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	align-items: center;
+	position: fixed;
+	top: 30%;
+	width: 80%;
+	height: 380rpx;
+	background-color: #f8f8f8;
+	border-radius: 10rpx;
+	padding: 0;
+}
+.view-bind-account-title {
+	background-color: #FD6D17;
+	color: white;
+	width: 100%;
+	height: 80rpx;
+	line-height: 80rpx;
+	text-align: center;
+	border-radius: 10rpx 10rpx 0 0 ;
+}
+.view-bind-account-account {
+	padding: 10rpx 0;
+	width: 100%;
+	height: 60rpx;
+	line-height: 60rpx;
+	display: flex;
+	justify-content: center;
+}
+.view-bind-account-password {
+	padding: 10rpx 0;
+	width: 100%;
+	height: 60rpx;
+	line-height: 60rpx;
+	display: flex;
+	justify-content: center;
+	
+}
+.view-bind-account-account input {
+	border-bottom: solid 1rpx #FD6D17;
+	height: 60rpx;
+	line-height: 60rpx;
+}
+.view-bind-account-password input {
+	border-bottom: solid 1rpx #FD6D17;
+	height: 60rpx;
+	line-height: 60rpx;
+}
+.view-bind-account-button {
+	width: 100%;
+	text-align: center;
+	font-size: 13rpx;
+	padding: 30rpx 0;
+}
+.view-bind-account-button button {
+	font-size: 13px;
+	margin: 0;
+}
+.view-bind-account-field-title {
+	text-align: right;
+	width: 30%;
+}
+.view-bind-account-oldpassword {
+	padding: 10rpx 0;
+	width: 100%;
+	height: 60rpx;
+	line-height: 60rpx;
+	display: flex;
+	justify-content: center;
+}
+.view-bind-account-oldpassword input {
+	border-bottom: solid 1rpx #FD6D17;
+	height: 60rpx;
+	line-height: 60rpx;
+}
