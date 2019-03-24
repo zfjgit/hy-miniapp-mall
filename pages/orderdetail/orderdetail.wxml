@@ -8,8 +8,8 @@
 		<navigator class='view-order-logistics' url='/pages/logistics/logistics?shipNo={{ order.shipNo }}&shipType={{ order.shipType }}&img={{order.orderImg}}&status={{ order.orderStatus}}&addr={{ order.shipAddr }}'>
 			<view class='view-order-logistics-left'>
 				<image src="/images/wl-1.png" class='view-order-logistics-icon'></image>
-				<view class='view-order-logistics-detail'>
-					<view class='view-order-logistics-last'>{{ order.payStatus + ' / ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
+				<view wx:if="{{order.payStatus}}" class='view-order-logistics-detail'>
+					<view class='view-order-logistics-last'>{{ order.payStatus + ' ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
 					<view class='view-order-logistics-time'>{{ order.shipTime }}</view>
 				</view>
 			</view>
@@ -22,8 +22,8 @@
 		<view class='view-order-logistics' >
 			<view class='view-order-logistics-left'>
 				<image src="/images/wl-1.png" class='view-order-logistics-icon'></image>
-				<view class='view-order-logistics-detail'>
-					<view class='view-order-logistics-last'>{{ order.payStatus + ' / ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
+				<view wx:if="{{order.payStatus}}" class='view-order-logistics-detail'>
+					<view class='view-order-logistics-last'>{{ order.payStatus + ' ' + order.shipStatus + ' ' + order.shipType + ' ' + order.shipNo }}</view>
 					<view class='view-order-logistics-time'>{{ order.shipTime }}</view>
 				</view>
 			</view>
@@ -82,7 +82,7 @@
         <view>收货时间：{{order.receivTime}}</view>
     </view>
 
-    <view class='view-order-recommend-products'>
+    <view wx:if="{{recommendProducts.length > 0}}" class='view-order-recommend-products'>
         <view class="view-order-recommend-products-title">您可能还喜欢</view>
         <view class='view-order-recommend-products-list'>
             <navigator class='view-order-recommend-product' wx:for="{{recommendProducts}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>

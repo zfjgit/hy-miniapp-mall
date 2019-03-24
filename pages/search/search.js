@@ -81,7 +81,7 @@ Page({
         });
 
         wx.showLoading({
-            title: '',
+            title: '正在加载...',
         });
 
         var _this = this;

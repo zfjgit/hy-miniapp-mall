@@ -18,14 +18,14 @@ Page({
             // receivTime: '2018-01-05 19:45:35',
             // total: 2123.00,
 			// shipAmount: 10,
-			// orderStatus: '已付款',
-			// payStatus: '已付款',
-			// shipStatus: '已发货',
+			//  orderStatus: '',
+			//  payStatus: '',
+			//  shipStatus: '',
 			// shipAddr: '北京市朝阳区XX路XX小区XX',
 			// shipName: '小李',
 			// shipMobile: '13022223333',
-			// shipNo: '1656544988',
-			// shipType: '顺丰',
+			//  shipNo: '',
+			//  shipType: '',
 			// orderImg: '',
             // items: [{
             //         id: 1,
@@ -154,7 +154,7 @@ Page({
 		if(order.status == 2) {
 			payTime = createTime;
 		}
-		var shipTime = createTime;
+		var shipTime = '';
 		if(order.status == 3 && order.ship_time) {
 			dt.setTime(parseInt(order.ship_time) * 1000);
 			shipTime = util.formatTime(dt);

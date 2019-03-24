@@ -63,7 +63,7 @@
   width: 95%;
   padding: 10rpx 20rpx;
   background-color: white;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 .view-order-item {
   display: flex;
@@ -86,7 +86,7 @@
 }
 .view-order-total {
   width: 95%;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   padding: 20rpx;
   background-color: white;
 }
@@ -115,7 +115,7 @@
 .view-order-contact {
   height: 100rpx;
   width: 95%;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   padding: 20rpx;
   background-color: white;
   text-align: left;
@@ -130,7 +130,7 @@
   justify-content: center;
   align-self: center;
   text-align: center;
-  background-color: transparent;
+  background-color: #eee;
   border: none;
 }
 
@@ -149,13 +149,13 @@
   width: 95%;
   padding: 20rpx;
   background-color: #fff;
-  margin: 10rpx 0;
+  margin: 20rpx 0;
 }
 
 .view-order-recommend-products {
   padding: 20rpx;
   margin-bottom: 100rpx;
-  background-color: #eee;
+  background-color: #f5f5f5;
 }
 .view-order-recommend-products-title {
   width: 95%;
