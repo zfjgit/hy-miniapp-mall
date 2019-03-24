@@ -88,7 +88,6 @@
   color: red;
 }
 .view-order-total-money-number {
-  font-size: 35rpx;
 }
 .view-order-total-count {
   margin-right: 30rpx;
@@ -100,7 +99,6 @@
 }
 
 .view-order-total-money-number {
-  font-size: 35rpx;
 }
 
 .view-order-msg {
@@ -143,7 +141,6 @@
   margin-right: 30rpx;
 }
 .view-order-total-sum-number {
-  font-size: 40rpx;
 }
 .view-order-operations-submit {
   width: 200rpx;

@@ -53,6 +53,10 @@ Page({
 			return;
 		}
 
+		wx.showLoading({
+			title: '',
+		});
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/member/wx-bind-account.do',
 			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
@@ -70,6 +74,9 @@ Page({
 						icon: 'none'
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
 	},
@@ -115,6 +122,10 @@ Page({
 			return;
 		}
 
+		wx.showLoading({
+			title: '',
+		});
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/member/change-password.do',
 			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
@@ -132,6 +143,9 @@ Page({
 						icon: 'none'
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
 	},

@@ -6,23 +6,23 @@ Page({
      */
     data: {
         product: {
-            id: 0,
-			products: [{ product_id: 1, sn: 'HY-123987289', price: 100 }, { product_id: 2, sn: 'HY-389548964', price: 200 }],
-            name: '复古镀金洗手盆龙头1232A',
-            promotion: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
-            sales: 1232,
-            starts: 392,
-            price: 899.00,
-            imgs: [
-                '/images/goods01.png',
-                '/images/goods02.png',
-            ],
-            description: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
-            descImgs: [
-                '/images/goods01.png',
-                '/images/goods02.png',
-            ],
-            storageNumber: 1000
+            // id: 0,
+			// products: [{ product_id: 1, sn: 'HY-123987289', price: 100 }, { product_id: 2, sn: 'HY-389548964', price: 200 }],
+            // name: '复古镀金洗手盆龙头1232A',
+            // promotion: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
+            // sales: 1232,
+            // starts: 392,
+            // price: 899.00,
+            // imgs: [
+            //     '/images/goods01.png',
+            //     '/images/goods02.png',
+            // ],
+            // description: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
+            // descImgs: [
+            //     '/images/goods01.png',
+            //     '/images/goods02.png',
+            // ],
+            // storageNumber: 1000
         },
         comments: [
             //{ id: 1, content: '好东西！', createTime: '2017-11-12 12:32:01', customer: { id: 1, name: '张三' } },
@@ -129,6 +129,10 @@ Page({
             showAddToCart: 0
         });
 
+		wx.showLoading({
+			title: '',
+		});
+
         var _this = this;
         wx.request({
             url: getApp().globalData.server + '/api/shop/cart/add-product.do',
@@ -151,7 +155,10 @@ Page({
                         icon: 'none'
                     });
                 }
-            }
+            },
+			complete: function() {
+				wx.hideLoading();
+			}
         });
     },
 
@@ -169,6 +176,10 @@ Page({
     },
 
     getProduct: function(id) {
+		wx.showLoading({
+			title: '',
+		});
+
         var _this = this;
         wx.request({
             url: getApp().globalData.server + '/api/shop/goods/get-goods.do',
@@ -224,7 +235,10 @@ Page({
                         }
                     })
                 }
-            }
+            },
+			complete: function() {
+				wx.hideLoading();
+			}
         })
     },
 

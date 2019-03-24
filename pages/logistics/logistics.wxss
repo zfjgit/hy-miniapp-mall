@@ -75,7 +75,6 @@
   margin-top: 0;
 }
 .view-node-date {
-  font-size: 35rpx;
 }
 .color-yellow {
   color: #FD6D17;

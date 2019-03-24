@@ -88,8 +88,8 @@
             <navigator class='view-order-recommend-product' wx:for="{{recommendProducts}}" wx:key="item" url='/pages/product/product?id={{item.id}}'>
                 <image class='view-order-recommend-product-img' src='{{item.img}}' mode='scaleToFill'></image>
                 <view class='view-order-recommend-product-name'>{{item.name}}</view>
-                <view class='view-order-recommend-product-price'>￥
-                    <text class='view-order-recommend-product-price-number'>{{item.price}}</text>
+                <view class='view-order-recommend-product-price'>
+                    <text class='view-order-recommend-product-price-number'>￥{{item.price}}</text>
                 </view>
             </navigator>
         </view>

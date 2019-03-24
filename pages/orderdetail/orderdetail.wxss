@@ -12,7 +12,6 @@
   justify-content: center;
 }
 .view-order-status-name {
-  font-size: 40rpx;
 }
 .view-order-status-img {
   width: 70rpx;
@@ -111,7 +110,6 @@
   color: red;
 }
 .view-order-total-money-number {
-  font-size: 35rpx;
 }
 
 .view-order-contact {
@@ -133,7 +131,6 @@
   align-self: center;
   text-align: center;
   background-color: transparent;
-  font-size: 30rpx;
   border: none;
 }
 
@@ -165,7 +162,6 @@
   padding: 20rpx 0;
   text-align: center;
   color: #FD6D17;
-  font-size: 35rpx;
 }
 .view-order-recommend-products-list {
   display: flex;
@@ -197,7 +193,6 @@
   color: red;
 }
 .view-order-recommend-product-price-number {
-  font-size: 35rpx;
 }
 
 .view-order-operations {

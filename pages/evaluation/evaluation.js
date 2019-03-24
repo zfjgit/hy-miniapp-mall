@@ -6,66 +6,66 @@ Page({
      * 页面的初始数据
      */
 	data: {
-		order: {
-			id: 1,
-			code: '1234213212332312124376672',
-			status: {
-				code: 'A',
-				name: '交易成功'
-			},
-			createTime: '2018-01-03 12:21:33',
-			payTime: '2018-01-03 12:21:41',
-			shipTime: '2018-01-03 15:12:13',
-			receivTime: '2018-01-05 19:45:35',
-			total: 2123.00,
-			items: [{
-				id: 1,
-				name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-				img: '/images/goods02.png',
-				price: '1213.00',
-				qty: 1, 
-				goodsId: 1,
-				productId: 1,
-				evaluation: {
-					type: {
-						code: '3',
-						name: '好评'
-					},
-					content: '好评好评。。。。。',
-					imgs: [
+		// order: {
+		// 	id: 1,
+		// 	code: '1234213212332312124376672',
+		// 	status: {
+		// 		code: 'A',
+		// 		name: '交易成功'
+		// 	},
+		// 	createTime: '2018-01-03 12:21:33',
+		// 	payTime: '2018-01-03 12:21:41',
+		// 	shipTime: '2018-01-03 15:12:13',
+		// 	receivTime: '2018-01-05 19:45:35',
+		// 	total: 2123.00,
+		// 	items: [{
+		// 		id: 1,
+		// 		name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+		// 		img: '/images/goods02.png',
+		// 		price: '1213.00',
+		// 		qty: 1, 
+		// 		goodsId: 1,
+		// 		productId: 1,
+		// 		evaluation: {
+		// 			type: {
+		// 				code: '3',
+		// 				name: '好评'
+		// 			},
+		// 			content: '好评好评。。。。。',
+		// 			imgs: [
 
-					]
-				}
-			},
-			{
-				id: 2,
-				name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-				img: '/images/goods01.png',
-				price: '143.00',
-				qty: 3,
-				goodsId: 1,
-				productId: 1,
-				evaluation: {
-					type: {
-						code: '3',
-						name: '好评'
-					},
-					content: '好评好评。。。。。',
-					imgs: [
-						'/images/goods01.png',
-						'/images/goods02.png',
-						'/images/goods01.png',
-					]
-				}
-			},
-			],
-			receivs: [{
-				id: 1,
-				name: '到达xx站点',
-				time: '2018-01-04 05:12:26',
-				status: {}
-			}]
-		},
+		// 			]
+		// 		}
+		// 	},
+		// 	{
+		// 		id: 2,
+		// 		name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+		// 		img: '/images/goods01.png',
+		// 		price: '143.00',
+		// 		qty: 3,
+		// 		goodsId: 1,
+		// 		productId: 1,
+		// 		evaluation: {
+		// 			type: {
+		// 				code: '3',
+		// 				name: '好评'
+		// 			},
+		// 			content: '好评好评。。。。。',
+		// 			imgs: [
+		// 				'/images/goods01.png',
+		// 				'/images/goods02.png',
+		// 				'/images/goods01.png',
+		// 			]
+		// 		}
+		// 	},
+		// 	],
+		// 	receivs: [{
+		// 		id: 1,
+		// 		name: '到达xx站点',
+		// 		time: '2018-01-04 05:12:26',
+		// 		status: {}
+		// 	}]
+		// },
 		shopEvaluations: [{
 			type: 'descriptionAccurate',
 			star: 3,

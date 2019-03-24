@@ -6,67 +6,68 @@ Page({
      */
     data: {
         order: {
-            id: 1,
-            code: '1234213212332312124376672',
-            status: {
-                code: 'A',
-                name: '交易成功'
-            },
-            createTime: '2018-01-03 12:21:33',
-            payTime: '2018-01-03 12:21:41',
-            shipTime: '2018-01-03 15:12:13',
-            receivTime: '2018-01-05 19:45:35',
-            total: 2123.00,
-			shipAmount: 10,
-			orderStatus: '已付款',
-			payStatus: '已付款',
-			shipStatus: '已发货',
-			shipAddr: '北京市朝阳区XX路XX小区XX',
-			shipName: '小李',
-			shipMobile: '13022223333',
-			shipNo: '1656544988',
-			shipType: '顺丰',
-			orderImg: '',
-            items: [{
-                    id: 1,
-                    name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-                    img: '/images/goods02.png',
-                    price: '1213.00',
-                    qty: 1
-                },
-                {
-                    id: 2,
-                    name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-                    img: '/images/goods01.png',
-                    price: '143.00',
-                    qty: 3
-                },
-            ],
-            receivs: [{
-                id: 1,
-                name: '到达xx站点',
-                time: '2018-01-04 05:12:26',
-                status: {}
-            }]
+            // id: 1,
+            // code: '1234213212332312124376672',
+            // status: {
+            //     code: 'A',
+            //     name: '交易成功'
+            // },
+            // createTime: '2018-01-03 12:21:33',
+            // payTime: '2018-01-03 12:21:41',
+            // shipTime: '2018-01-03 15:12:13',
+            // receivTime: '2018-01-05 19:45:35',
+            // total: 2123.00,
+			// shipAmount: 10,
+			// orderStatus: '已付款',
+			// payStatus: '已付款',
+			// shipStatus: '已发货',
+			// shipAddr: '北京市朝阳区XX路XX小区XX',
+			// shipName: '小李',
+			// shipMobile: '13022223333',
+			// shipNo: '1656544988',
+			// shipType: '顺丰',
+			// orderImg: '',
+            // items: [{
+            //         id: 1,
+            //         name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+            //         img: '/images/goods02.png',
+            //         price: '1213.00',
+            //         qty: 1
+            //     },
+            //     {
+            //         id: 2,
+            //         name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+            //         img: '/images/goods01.png',
+            //         price: '143.00',
+            //         qty: 3
+            //     },
+            // ],
+            // receivs: [{
+            //     id: 1,
+            //     name: '到达xx站点',
+            //     time: '2018-01-04 05:12:26',
+            //     status: {}
+            // }]
         },
-        recommendProducts: [{
-                id: 1,
-                name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-                img: '/images/goods02.png',
-                price: '1213.00'
-            },
-            {
-                id: 2,
-                name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
-                img: '/images/goods01.png',
-                price: '143.00'
-            },
-            {
-                id: 3,
-                name: '复古镀12255惠促销 领券参加优惠促销活动',
-                price: 5435.00,
-                img: '/images/goods02.png'
-            },
+        recommendProducts: [
+			// {
+            //     id: 1,
+            //     name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+            //     img: '/images/goods02.png',
+            //     price: '1213.00'
+            // },
+            // {
+            //     id: 2,
+            //     name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91',
+            //     img: '/images/goods01.png',
+            //     price: '143.00'
+            // },
+            // {
+            //     id: 3,
+            //     name: '复古镀12255惠促销 领券参加优惠促销活动',
+            //     price: 5435.00,
+            //     img: '/images/goods02.png'
+            // },
         ]
     },
 
@@ -74,6 +75,10 @@ Page({
         var _this = this;
 
         var idx = e.currentTarget.dataset.idx;
+
+		wx.showLoading({
+			title: '',
+		});
 
 		wx.showModal({
 			title: '确认',
@@ -99,12 +104,19 @@ Page({
 						}
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		});
     },
 
 	getOrder: function(id) {
 		var page = this;
+
+		wx.showLoading({
+			title: '',
+		});
 
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/order/wxgetorder.do',
@@ -126,6 +138,9 @@ Page({
 						
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		});
 	},

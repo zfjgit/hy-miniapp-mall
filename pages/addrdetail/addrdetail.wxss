@@ -43,10 +43,11 @@
 }
 .view-addr-detail {
   width: 100%;
-  height: 200rpx;
+  height: 100rpx;
 }
 .view-addr-item-value {
   width: 70%;
+  margin-top: 5rpx;
 }
 .view-addr-save {
   width:95%;

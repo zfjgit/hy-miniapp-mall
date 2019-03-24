@@ -39,13 +39,11 @@
   line-height: 35rpx;
   padding: 5rpx 0;
   color: #aaa;
-  font-size: 25rpx;
 }
 .view-copyright-holder {
   width: 100%;
   height: 35rpx;
   line-height: 35rpx;
   padding: 5rpx 0;
-  font-size: 25rpx;
 }
 

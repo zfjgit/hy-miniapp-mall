@@ -12,7 +12,9 @@ App({
 		settings: null,
 		userInfo: { member_id: 5 },
 		appTitleText: '煌亿卫浴店',
-		appLogo: '/images/honeyi.png',
+		appLogo: '/images/logo/honeyi-454.png',
+		// server: 'https://www.honeyi.shop/',
+		// statics: 'http://www.honeyi.shop/statics'
 		server: 'http://192.168.0.27:8080/javashop-ui',
 		statics: 'http://192.168.0.27:8080/statics'
 	}

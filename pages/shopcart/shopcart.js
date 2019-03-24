@@ -11,10 +11,10 @@ Page({
 			moveX: 0,
 		},
 		products: [
-			{
-				itemId: 1, id: 1, pid: 1, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91', img: '/images/goods02.png', number: 1,
-				storage: 1000, isBuySelected: 0, isEditSelected: 0
-			},
+			//{
+			//	itemId: 1, id: 1, pid: 1, price: 989.00, name: '欧式镀金复古龙头 新 热 惠 12 1 A92 91', img: '/images/goods02.png', number: 1,
+			//	storage: 1000, isBuySelected: 0, isEditSelected: 0
+			//},
 
 		],
 		page: {
@@ -380,6 +380,10 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		wx.showLoading({
+			title: '',
+		});
+
 		this.setMode(this.data.mode_buy);
 		this.resetData();
 
@@ -401,6 +405,9 @@ Page({
 					}
 				}
 				_this.setData({ products: _this.data.products });
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
 	},

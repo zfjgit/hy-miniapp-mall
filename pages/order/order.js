@@ -70,60 +70,61 @@ Page({
                 btn: ''
             }
         },
-        orders: [{
-                id: 1,
-                total: 2656.00,
-                ship: 10.00,
-                code: 'ASDHKBA1123',
-                createTime: '2018-01-10 12:23:12',
-                statusText: '待付款，请尽快支付',
-                statusBtnText: '付款',
-                statusBtn: 'pay',
-				shipNo: '454654322112',
-                items: [{
-                        name: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
-                        price: 182.00,
-                        qty: 2,
-                        img: '/images/goods01.png'
-                    },
-                    {
-                        name: '复古镀金洗手盆龙头1232A 领券参加优惠232A 领券参加优惠促销活动',
-                        price: 23500.00,
-                        qty: 1,
-                        img: '/images/goods02.png'
-                    },
-                ]
-            },
-            {
-                id: 2,
-                total: 223.00,
-                ship: 10.00,
-                code: 'WEQGBSQWA11342',
-                createTime: '2018-01-14 15:54:15',
-                statusText: '订单未付款，请尽快支付',
-                statusBtnText: '付款',
-                statusBtn: 'pay',
-				shipNo: '454654322112',
-                items: [{
-                        name: '复古镀金洗手盆龙头1232A 领券参加优惠促销 领券参加优惠促销活动',
-                        price: 355.00,
-                        qty: 2,
-                        img: '/images/goods01.png'
-                    },
-                    {
-                        name: '复古镀12255惠促销 领券参加优惠促销活动',
-                        price: 5435.00,
-                        qty: 3,
-                        img: '/images/goods02.png'
-                    },
-                    {
-                        name: '复古镀12255惠促销 领券参加优惠促销活动',
-                        price: 5435.00,
-                        qty: 3,
-                        img: '/images/goods02.png'
-                    },
-                ]
-            },
+        orders: [
+			// {
+            //     id: 1,
+            //     total: 2656.00,
+            //     ship: 10.00,
+            //     code: 'ASDHKBA1123',
+            //     createTime: '2018-01-10 12:23:12',
+            //     statusText: '待付款，请尽快支付',
+            //     statusBtnText: '付款',
+            //     statusBtn: 'pay',
+			// 	shipNo: '454654322112',
+            //     items: [{
+            //             name: '复古镀金洗手盆龙头1232A 领券参加优惠促销活动复古镀金洗手盆龙头1232A 领券参加优惠促销活动',
+            //             price: 182.00,
+            //             qty: 2,
+            //             img: '/images/goods01.png'
+            //         },
+            //         {
+            //             name: '复古镀金洗手盆龙头1232A 领券参加优惠232A 领券参加优惠促销活动',
+            //             price: 23500.00,
+            //             qty: 1,
+            //             img: '/images/goods02.png'
+            //         },
+            //     ]
+            // },
+            // {
+            //     id: 2,
+            //     total: 223.00,
+            //     ship: 10.00,
+            //     code: 'WEQGBSQWA11342',
+            //     createTime: '2018-01-14 15:54:15',
+            //     statusText: '订单未付款，请尽快支付',
+            //     statusBtnText: '付款',
+            //     statusBtn: 'pay',
+			// 	shipNo: '454654322112',
+            //     items: [{
+            //             name: '复古镀金洗手盆龙头1232A 领券参加优惠促销 领券参加优惠促销活动',
+            //             price: 355.00,
+            //             qty: 2,
+            //             img: '/images/goods01.png'
+            //         },
+            //         {
+            //             name: '复古镀12255惠促销 领券参加优惠促销活动',
+            //             price: 5435.00,
+            //             qty: 3,
+            //             img: '/images/goods02.png'
+            //         },
+            //         {
+            //             name: '复古镀12255惠促销 领券参加优惠促销活动',
+            //             price: 5435.00,
+            //             qty: 3,
+            //             img: '/images/goods02.png'
+            //         },
+            //     ]
+            // },
         ],
 
         selectedType: 'all',
@@ -144,6 +145,11 @@ Page({
 		if(!status) {
 			status = 'all';
 		}
+
+		wx.showLoading({
+			title: '',
+		});
+
         wx.request({
             url: getApp().globalData.server + '/api/shop/order/wxgetorders.do',
             data: {
@@ -215,7 +221,10 @@ Page({
                         orders: orderList
                     });
                 }
-            }
+            },
+			complete: function() {
+				wx.hideLoading();
+			}
         })
     },
 
@@ -224,6 +233,10 @@ Page({
 		
 		var id = e.currentTarget.dataset.id;
 		
+		wx.showLoading({
+			title: '',
+		});
+
 		wx.showModal({
 			title: '确认',
 			content: '确定要删除这个订单？',
@@ -248,6 +261,9 @@ Page({
 						}
 					})
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		});
 	},
@@ -257,6 +273,10 @@ Page({
 		var id = e.currentTarget.dataset.id;
 
 		console.log('do_cancel.id=', id);
+
+		wx.showLoading({
+			title: '',
+		});
 
 		wx.showModal({
 			title: '确认',
@@ -284,6 +304,9 @@ Page({
 					});
 
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
 	},
@@ -401,6 +424,10 @@ Page({
 
 		console.log('do_confirm.id=', id);
 
+		wx.showLoading({
+			title: '',
+		});
+
 		wx.showModal({
 			title: '确认',
 			content: '确定已收到宝贝？',
@@ -427,6 +454,9 @@ Page({
 					});
 
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		});
 	},

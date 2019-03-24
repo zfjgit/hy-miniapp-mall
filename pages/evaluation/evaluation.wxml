@@ -25,7 +25,7 @@
             </view>
 
             <view class='view-eva-comments'>
-                <textarea class='view-eva-comments-text' data-idx='{{index}}' bindinput='contentInput'></textarea>
+                <textarea placeholder='请输入评价内容' class='view-eva-comments-text' data-idx='{{index}}' bindinput='contentInput'></textarea>
                 <image data-idx='{{index}}' src='/images/camera-2.png' class='view-eva-comments-img-button' bindtap='chooseCommentsImgTap' hidden='yes'></image>
             </view>
 

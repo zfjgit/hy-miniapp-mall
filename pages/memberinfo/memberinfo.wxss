@@ -13,5 +13,4 @@
 }
 .view-item {
 	border-bottom: solid 1rpx #eee;
-	font-size: 13px;
 }

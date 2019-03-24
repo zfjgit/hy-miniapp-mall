@@ -77,23 +77,26 @@ Page({
             shipType: shipType,
             shipAddr: shipAddr,
             orderStatus: orderStatus,
-            productImg: productImg
+            productImg: productImg,
+            url: getApp().globalData.server + '/api/shop/order/logistics.do?type=' + shipType + '&postid=' + shipNo
         });
 
-		wx.showLoading({
-			title: '',
-		})
+        wx.showLoading({
+            title: '',
+        });
+
+
     },
 
-	bindload: function() {
-		console.log('bindload');
-		wx.hideLoading();
-	},
+    bindload: function() {
+        console.log('bindload');
+        wx.hideLoading();
+    },
 
-	binderror: function() {
-		console.log('binderror');
-		wx.hideLoading();
-	},
+    binderror: function() {
+        console.log('binderror');
+        wx.hideLoading();
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

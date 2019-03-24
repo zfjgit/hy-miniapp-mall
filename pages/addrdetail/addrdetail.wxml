@@ -1,14 +1,14 @@
 <view class="container">
     <view class="view-addr-item">
         <view class='view-addr-item-title'>收货人</view>
-        <view>
+        <view class='view-addr-item-value'>
             <input bindinput='bindName' placeholder='请输入收货人姓名' value='{{addr.name}}'></input>
         </view>
     </view>
 
     <view class="view-addr-item">
         <view class='view-addr-item-title'>联系电话</view>
-        <view>
+        <view class='view-addr-item-value'>
             <input bindinput='bindTel' placeholder='请输入联系电话' value='{{addr.tel}}'></input>
         </view>
     </view>
@@ -17,7 +17,7 @@
         <view class='view-addr-item-title'>所在地区</view>
         <view style='width:80%;'>
             <picker style='width:100%;' mode="region" data-name="region" value="{{region}}" bindchange="bindRegionChange">
-                <view>： {{region}}</view>
+                <view style='width:100%;'>：{{region}}</view>
             </picker>
         </view>
     </view>
@@ -31,14 +31,14 @@
 
     <view class="view-addr-item">
         <view class='view-addr-item-title'>邮政编码</view>
-        <view>
-            <input bindinput='bindZip' placeholder='邮政编码' value='{{addr.zip}}'></input>
+        <view class='view-addr-item-value'>
+            <input bindinput='bindZip' type='number' placeholder='邮政编码' value='{{addr.zip}}'></input>
         </view>
     </view>
 
     <view class="view-addr-item">
         <view class='view-addr-item-title'>地址名称</view>
-        <view>
+        <view class='view-addr-item-value'>
             <input bindinput='bindAddrName' placeholder='家、公司、代收点' value='{{addr.shipAddressName}}'></input>
         </view>
     </view>

@@ -22,10 +22,8 @@
   margin: 5rpx 0;
   padding: 20rpx;
   padding-right: 20rpx;
-  font-size: 30rpx;
 }
 .view-product-name {
-  font-size: 35rpx;
   padding: 10rpx 0;
 }
 .view-product-promotion {
@@ -43,7 +41,6 @@
   color: red;
 }
 .view-product-detail-price-number {
-  font-size: 45rpx;
 }
 .view-product-detail-sales-number {
   color: red;
@@ -72,7 +69,6 @@
 }
 
 .view-product-desc-content-words {
-  font-size: 30rpx;
   line-height: 50rpx;
 }
 .view-product-desc-content-img {
@@ -127,7 +123,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   align-self: center;
-  font-size: 30rpx;
 }
 .view-product-bottom-menu-cs{
   width: 25%;
@@ -139,7 +134,6 @@
   align-self: center;
   text-align: center;
   background-color: transparent;
-  font-size: 30rpx;
   border: none;
 }
 .view-product-bottom-menu-cs::after {
@@ -250,7 +244,6 @@
   width: 50rpx;
   display: inline-block;
   text-align: center;
-  font-size: 35rpx;
   height: 100%;
   padding: 0 20rpx;
 }
@@ -259,7 +252,6 @@
   width: 100rpx;
   display: inline-block;
   text-align: center;
-  font-size: 35rpx;
   height: 100%;
   padding: 0 20rpx;
 }
@@ -268,7 +260,6 @@
   width: 50rpx;
   display: inline-block;
   text-align: center;
-  font-size: 35rpx;
   height: 100%;
   padding: 0 20rpx;
 }
@@ -278,7 +269,6 @@
   background-color: red;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 35rpx;
   color: #fff;
 }
 .view-cover-addtocart-view {

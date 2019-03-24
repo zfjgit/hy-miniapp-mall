@@ -6,114 +6,17 @@ Page({
 	 */
 	data: {
 		categoryLevel1s: [
-			{
-				id: 1,
-				name: '菜盆龙头'
-			},
-			{
-				id: 2,
-				name: '洗手盆龙头'
-			},
-			{
-				id: 3,
-				name: '淋浴龙头'
-			},
-			{
-				id: 4,
-				name: '花洒龙头'
-			},
-			{
-				id: 5,
-				name: '角阀'
-			},
-			{
-				id: 6,
-				name: '马桶'
-			}, {
-				id: 7,
-				name: '菜盆龙头'
-			},
-			{
-				id: 8,
-				name: '洗手盆龙头'
-			},
-			{
-				id: 9,
-				name: '淋浴龙头'
-			},
-			{
-				id: 10,
-				name: '花洒龙头'
-			},
-			{
-				id: 11,
-				name: '角阀'
-			},
-			{
-				id: 12,
-				name: '马桶'
-			},
+			//{
+			//	id: 1,
+			//	name: '菜盆龙头'
+			//},
 		],
 		categoryLevel2s: [
-			{
-				id: 1,
-				name: '菜盆龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 2,
-				name: '洗手盆龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 3,
-				name: '淋浴龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 4,
-				name: '花洒龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 5,
-				name: '角阀',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 6,
-				name: '马桶',
-				img: '/images/goods02.png'
-			}, {
-				id: 7,
-				name: '菜盆龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 8,
-				name: '洗手盆龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 9,
-				name: '淋浴龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 10,
-				name: '花洒龙头',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 11,
-				name: '角阀',
-				img: '/images/goods02.png'
-			},
-			{
-				id: 12,
-				name: '马桶',
-				img: '/images/goods02.png'
-			},
+			//{
+			//	id: 1,
+			//	name: '菜盆龙头',
+			//	img: '/images/goods02.png'
+			//},
 		],
 		selectedId: 0
 	},
@@ -155,6 +58,10 @@ Page({
 	onLoad: function (options) {
 		var page = this;
 
+		wx.showLoading({
+			title: '',
+		});
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/goods/get-categorys.do',
 			success: function (res) {
@@ -172,6 +79,9 @@ Page({
 				}
 				page.setData({ selectedId: page.data.selectedId, categoryLevel1s: page.data.categoryLevel1s });
 				page.getChildCategorys();
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		})
 	},

@@ -10,7 +10,6 @@
   padding: 20rpx;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 40rpx;
   color: red;
 
 }
@@ -18,7 +17,6 @@
   width: 95%;
   padding: 20rpx;
   line-height: 50rpx;
-  font-size: 30rpx;
   text-indent: 2em;
   text-align: left;
 }
@@ -26,13 +24,11 @@
   margin-top: 50rpx;
   width: 80%;
   padding: 00rpx 0;
-  font-size: 30rpx;
   text-align: right;
 }
 
 .view-publishDate{
   width: 82%;
   padding: 0;
-  font-size: 30rpx;
   text-align: right;
 }

@@ -9,7 +9,9 @@
   box-sizing: border-box;
   background-color: #eee;
   min-height: 100%;
-  font-size: 30rpx;
+}
+view,input,text,button {
+	font-size: 25rpx!important;
 }
 page{
     height: 100%;
@@ -41,7 +43,7 @@ page{
   align-content: center;
   align-self: center;
   background-color: #fff;
-  margin: 5rpx 0;
+  margin: 2rpx 0;
 }
 .view-item-title {
   width: 80%;
