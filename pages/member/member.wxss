@@ -77,7 +77,7 @@
 	top: 30%;
 	width: 80%;
 	height: 380rpx;
-	background-color: #ecece9ef;
+	background-color: #f0f0ee;
 	border-radius: 10rpx;
 	padding: 0;
 }

@@ -9,36 +9,36 @@ Page({
 	data: {
 		isEmptyHintShow: false,
 		coupons: [
-			{
-				id: 1,
-				name: '订单金额满500减50',
-				startDate: '2018-01-25',
-				endDate: '2018-02-25',
-				intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
-				isIntroShow: false,
-				isExpired: false,
-				isUsed: false,
-			},
-			{
-				id: 2,
-				name: '订单金额满500减50',
-				startDate: '2018-01-25',
-				endDate: '2018-02-25',
-				intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
-				isIntroShow: false,
-				isExpired: true,
-				isUsed: false,
-			},
-			{
-				id: 3,
-				name: '订单金额满500减50',
-				startDate: '2018-01-25',
-				endDate: '2018-02-25',
-				intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
-				isIntroShow: false,
-				isExpired: false,
-				isUsed: true,
-			}
+			// {
+			// 	id: 1,
+			// 	name: '订单金额满500减50',
+			// 	startDate: '2018-01-25',
+			// 	endDate: '2018-02-25',
+			// 	intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
+			// 	isIntroShow: false,
+			// 	isExpired: false,
+			// 	isUsed: false,
+			// },
+			// {
+			// 	id: 2,
+			// 	name: '订单金额满500减50',
+			// 	startDate: '2018-01-25',
+			// 	endDate: '2018-02-25',
+			// 	intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
+			// 	isIntroShow: false,
+			// 	isExpired: true,
+			// 	isUsed: false,
+			// },
+			// {
+			// 	id: 3,
+			// 	name: '订单金额满500减50',
+			// 	startDate: '2018-01-25',
+			// 	endDate: '2018-02-25',
+			// 	intro: '订单金额满500减50优惠券\n\n使用条件\n订单金额满500可使用此优惠券。\n\n使用规则\n1、不可与其他优惠券共用；\n2、优惠券不可转让、不开发票、不兑换现金。\n\n使用范围\n全店商品都可使用。',
+			// 	isIntroShow: false,
+			// 	isExpired: false,
+			// 	isUsed: true,
+			// }
 		]
 	},
 
@@ -52,6 +52,9 @@ Page({
 	getCoupons: function() {
 		var page = this;
 
+		wx.showLoading({
+			title: '正在加载...',
+		});
 		wx.request({
 			url: app.globalData.server + '/api/shop/member/coupons.do',
 			data: { memberId: app.globalData.userInfo.member_id },
@@ -91,6 +94,9 @@ Page({
 						page.setData({ isEmptyHintShow: true });
 					}
 				}
+			},
+			complete: function() {
+				wx.hideLoading();
 			}
 		});
 	},

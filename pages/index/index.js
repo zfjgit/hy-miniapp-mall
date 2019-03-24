@@ -177,7 +177,7 @@ Page({
     getCategoryGoods: function() {
         var page = this;
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
         wx.request({

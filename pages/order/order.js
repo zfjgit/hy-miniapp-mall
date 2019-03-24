@@ -147,7 +147,7 @@ Page({
 		}
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
         wx.request({
@@ -234,7 +234,7 @@ Page({
 		var id = e.currentTarget.dataset.id;
 		
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.showModal({
@@ -275,7 +275,7 @@ Page({
 		console.log('do_cancel.id=', id);
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.showModal({
@@ -425,7 +425,7 @@ Page({
 		console.log('do_confirm.id=', id);
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.showModal({

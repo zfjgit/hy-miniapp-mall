@@ -108,6 +108,11 @@ Page({
 			clearTimeout(this.data.t);
 		}
 
+		wx.showLoading({
+			title: '查询支付状态',
+			mask: true
+		});
+
 		wx.request({
 			url: getApp().globalData.server + '/api/shop/payment/get-pay-status-for-wechat.do',
 			data: { orderId: orderId, pluginId: 'weixinPayPlugin' },
@@ -163,6 +168,11 @@ Page({
 		var addrId = wx.getStorageSync('selectedAddrId');
 
 		console.log('addrId=', addrId);
+
+		wx.showLoading({
+			title: '正在加载...',
+			mask: true
+		});
 
 		if (addrId) {
 			wx.request({

@@ -381,7 +381,7 @@ Page({
 	 */
 	onShow: function () {
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		this.setMode(this.data.mode_buy);

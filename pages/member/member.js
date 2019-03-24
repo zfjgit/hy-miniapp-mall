@@ -54,7 +54,7 @@ Page({
 		}
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.request({
@@ -123,7 +123,7 @@ Page({
 		}
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.request({

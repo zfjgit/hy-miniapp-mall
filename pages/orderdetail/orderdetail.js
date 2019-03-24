@@ -77,7 +77,7 @@ Page({
         var idx = e.currentTarget.dataset.idx;
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.showModal({
@@ -115,7 +115,7 @@ Page({
 		var page = this;
 
 		wx.showLoading({
-			title: '',
+			title: '正在加载...',
 		});
 
 		wx.request({
