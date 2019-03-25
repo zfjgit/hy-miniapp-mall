@@ -56,8 +56,54 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		this.checkDataTimeout();
+	},
+
+	checkDataTimeout: function() {
 		var page = this;
 
+		wx.showLoading({
+			title: '正在加载...',
+		});
+
+		var addCategorysLevel1Time = wx.getStorageSync('addCategorysLevel1Time');
+
+		wx.request({
+			url: getApp().globalData.server + '/api/shop/member/wx-check-data-timeout.do',
+			data: {
+				addCategorysLevel1Time: addCategorysLevel1Time,
+			},
+			success: function (res) {
+				var r = res.data;
+				console.log('checkDataTimeOut.data=', r);
+				if (r && r.result == 1 && r.data) {
+					page.initData(r);
+				} else {
+					page.initData();
+				}
+			},
+			fail: function() {
+				page.initData();
+			},
+			complete: function() {
+				wx.hideLoading();
+			}
+		})
+	},
+
+	initData: function (r) {
+		var categoryLevel1s = wx.getStorageSync('categoryLevel1s');
+
+		if (!r || r.data.refreshCategoryLevel || !categoryLevel1s || categoryLevel1s.length == 0) {
+			this.getCategoryLevel1s();
+		} else {
+			this.setData({ categoryLevel1s: categoryLevel1s});
+		}
+	},
+
+	getCategoryLevel1s: function () {
+		var page = this;
+		
 		wx.showLoading({
 			title: '正在加载...',
 		});
@@ -79,8 +125,17 @@ Page({
 				}
 				page.setData({ selectedId: page.data.selectedId, categoryLevel1s: page.data.categoryLevel1s });
 				page.getChildCategorys();
+
+				wx.setStorage({
+					key: 'categoryLevel1s',
+					data: page.data.categoryLevel1s,
+				});
+				wx.setStorage({
+					key: 'addCategorysLevel1Time',
+					data: new Date().getTime(),
+				})
 			},
-			complete: function() {
+			complete: function () {
 				wx.hideLoading();
 			}
 		})

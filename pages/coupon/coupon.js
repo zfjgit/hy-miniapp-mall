@@ -57,6 +57,7 @@ Page({
 		});
 		wx.request({
 			url: app.globalData.server + '/api/shop/member/coupons.do',
+			header: { 'cookie': wx.getStorageSync("sessionid"), 'content-type': 'application/x-www-form-urlencoded' },
 			data: { memberId: app.globalData.userInfo.member_id },
 			success: function (res) {
 				var r = res.data;

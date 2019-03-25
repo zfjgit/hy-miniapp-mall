@@ -23,7 +23,7 @@ Page({
             circular: true,
             indicatorActiveColor: 'red',
             images: [
-				// {
+                // {
                 //     url: "/images/800x450-2.jpg",
                 //     id: 100
                 // },
@@ -39,7 +39,7 @@ Page({
         },
         noticeSwiper: {
             notices: [
-				// {
+                // {
                 //     title: "庆祝商城上线，优惠促销活动！",
                 //     id: 1,
                 //     catid: 31
@@ -53,27 +53,27 @@ Page({
         },
         categoryScroll: {
             categorys: [
-				// {
-				// 	img: '/images/categorys/category-1.png',
-				// 	name: '龙头',
-				// 	id: 1
-				// },
-			]
+                // {
+                // 	img: '/images/categorys/category-1.png',
+                // 	name: '龙头',
+                // 	id: 1
+                // },
+            ]
         },
         categoryProducts: [
-			//  {
-				// id: 1,
-				// name: '龙头',
-				// products: [{
-                //     img: '/images/goods02.png',
-                //     name: '复古镀金洗手盆龙头1232A复古镀金洗手盆龙头1232A复古镀金洗手盆龙头1232A',
-                //     id: 1,
-                //     price: 2555.00,
-                //     sales: 2320
-                // },
-				// ]
-        	//  }, 
-		]
+            //  {
+            // id: 1,
+            // name: '龙头',
+            // products: [{
+            //     img: '/images/goods02.png',
+            //     name: '复古镀金洗手盆龙头1232A复古镀金洗手盆龙头1232A复古镀金洗手盆龙头1232A',
+            //     id: 1,
+            //     price: 2555.00,
+            //     sales: 2320
+            // },
+            // ]
+            //  }, 
+        ]
     },
 
     //事件处理函数
@@ -84,14 +84,98 @@ Page({
     },
 
     onLoad: function() {
-        this.initialAuthorizeFlag();
+        this.checkDataTimeOut();
+    },
 
-        this.getCategorys();
+    checkDataTimeOut: function() {
+        var page = this;
 
-        this.getCategoryGoods();
+        wx.showLoading({
+            title: '正在加载...',
+        });
 
-        this.getAdvList();
-        this.getNotices();
+        var addAdvListTime = wx.getStorageSync('addAdvListTime');
+        var addNoticesTime = wx.getStorageSync('addNoticesTime');
+        var addUserInfoTime = wx.getStorageSync('addUserInfoTime');
+        var addCategorysTime = wx.getStorageSync('addCategorysTime');
+        var addCategoryGoodsTime = wx.getStorageSync('addCategoryGoodsTime');
+
+        wx.request({
+            url: app.globalData.server + '/api/shop/member/wx-check-data-timeout.do',
+            data: {
+                addAdvListTime: addAdvListTime,
+                addNoticesTime: addNoticesTime,
+                addUserInfoTime: addUserInfoTime,
+                addCategorysTime: addCategorysTime,
+                addCategoryGoodsTime: addCategoryGoodsTime
+            },
+            success: function(res) {
+                var r = res.data;
+                console.log('checkDataTimeOut.data=', r);
+                if (r && r.result == 1 && r.data) {
+                    page.initData(r);
+                } else {
+					page.initData();
+				}
+            },
+			fail: function() {
+				page.initData();
+			},
+            complete: function() {
+                wx.hideLoading();
+            }
+        });
+    },
+
+    initData: function(r) {
+		var page = this;
+
+        var notices = wx.getStorageSync('notices');
+        var advList = wx.getStorageSync('advList');
+        var userInfo = wx.getStorageSync('userInfo');
+        var categorys = wx.getStorageSync('categorys');
+        var categoryGoods = wx.getStorageSync('categoryGoods');
+
+        if (!r || r.data.refreshUserInfo || !userInfo || Object.keys(userInfo).length == 0) {
+            page.initialAuthorizeFlag();
+        } else {
+            getApp().globalData.userInfo = userInfo;
+        }
+
+		if (!r || r.data.refreshAdvList || !advList || advList.length == 0) {
+			page.getAdvList();
+		} else {
+			page.data.bannerSwiper.images = advList;
+			this.setData({
+				bannerSwiper: page.data.bannerSwiper
+			});
+		}
+
+		if (!r || r.data.refreshNotices || !notices || notices.length == 0) {
+			page.getNotices();
+		} else {
+			page.data.noticeSwiper.notices = notices;
+			this.setData({
+				noticeSwiper: page.data.noticeSwiper
+			});
+		}
+
+		if (!r || r.data.refreshCategorys || !categorys || categorys.length == 0) {
+            page.getCategorys();
+        } else {
+			page.data.categoryScroll.categorys = categorys;
+            this.setData({
+				categoryScroll: page.data.categoryScroll
+            });
+        }
+
+		if (!r || r.data.refreshCategoryGoods || !categoryGoods || categoryGoods.length == 0) {
+            page.getCategoryGoods();
+        } else {
+            this.setData({
+                categoryProducts: categoryGoods
+            });
+        }
     },
 
     getAdvList: function() {
@@ -118,6 +202,15 @@ Page({
                     page.setData({
                         bannerSwiper: page.data.bannerSwiper
                     });
+
+                    wx.setStorage({
+                        key: 'advList',
+						data: imgs,
+                    });
+                    wx.setStorage({
+                        key: 'addAdvListTime',
+                        data: new Date().getTime(),
+                    })
                 }
             }
         });
@@ -139,10 +232,20 @@ Page({
                             id: r.data[i].id
                         });
                     }
+
                     page.data.noticeSwiper.notices = notices;
                     page.setData({
                         noticeSwiper: page.data.noticeSwiper
                     });
+
+                    wx.setStorage({
+                        key: 'notices',
+						data: notices,
+                    });
+                    wx.setStorage({
+                        key: 'addNoticesTime',
+                        data: new Date().getTime(),
+                    })
                 }
             }
         });
@@ -165,10 +268,20 @@ Page({
                             id: c.cat_id
                         });
                     }
-                    page.data.categoryScroll.categorys = categorys;
+
+					page.data.categoryScroll.categorys = categorys;
                     page.setData({
-                        categoryScroll: page.data.categoryScroll
+						categoryScroll: page.data.categoryScroll
                     });
+
+                    wx.setStorage({
+                        key: 'categorys',
+						data: categorys,
+                    });
+                    wx.setStorage({
+                        key: 'addCategorysTime',
+                        data: new Date().getTime(),
+                    })
                 }
             }
         });
@@ -176,9 +289,9 @@ Page({
 
     getCategoryGoods: function() {
         var page = this;
-		wx.showLoading({
-			title: '正在加载...',
-		});
+        wx.showLoading({
+            title: '正在加载...',
+        });
 
         wx.request({
             url: app.globalData.server + '/api/shop/goods/get-category-goods.do',
@@ -208,15 +321,25 @@ Page({
                             products: products
                         });
                     }
-                    page.data.categoryProducts = categoryGoods;
+
                     page.setData({
-                        categoryProducts: page.data.categoryProducts
+						categoryProducts: categoryGoods
                     });
+
+                    wx.setStorage({
+                        key: 'categoryGoods',
+						data: categoryGoods,
+                    });
+
+                    wx.setStorage({
+                        key: 'addCategoryGoodsTime',
+                        data: new Date().getTime(),
+                    })
                 }
             },
-			complete: function() {
-				wx.hideLoading();
-			}
+            complete: function() {
+                wx.hideLoading();
+            }
         });
     },
 
@@ -333,6 +456,15 @@ Page({
                         title: '登录成功',
                     });
                     getApp().globalData.userInfo = res.data.data;
+
+                    wx.setStorage({
+                        key: 'userInfo',
+                        data: res.data.data,
+                    });
+                    wx.setStorage({
+                        key: 'addUserInfoTime',
+                        data: new Date().getTime(),
+                    })
                 }
             },
             fail: function() {
