@@ -164,6 +164,10 @@ Page({
                 console.log('getOrders.res=', d);
 
                 if (d && d.result == 1 && d.data) {
+					wx.showLoading({
+						title: '正在加载...',
+					});
+
                     var orders = d.data;
 
                     var orderList = [];
@@ -220,6 +224,8 @@ Page({
                     page.setData({
                         orders: orderList
                     });
+
+					wx.hideLoading();
                 }
             },
 			complete: function() {

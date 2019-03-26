@@ -11,7 +11,7 @@
   min-height: 100%;
 }
 view,input,text,button {
-	font-size: 25rpx!important;
+	font-size: 27rpx!important;
 }
 page{
     height: 100%;

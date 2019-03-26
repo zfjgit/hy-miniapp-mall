@@ -25,6 +25,10 @@ Page({
     },
 
     getNotice: function(data) {
+		wx.showLoading({
+			title: '正在加载...',
+		});
+
         var _this = this;
         wx.request({
             url: getApp().globalData.server + '/api/shop/notice/get-notice.do',
@@ -48,7 +52,10 @@ Page({
                         notice: _this.data.notice
                     });
                 }
-            }
+            },
+			complete: function() {
+				wx.hideLoading();
+			}
         })
     },
 
