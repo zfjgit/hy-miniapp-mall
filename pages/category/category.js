@@ -97,7 +97,8 @@ Page({
 		if (!r || r.data.refreshCategoryLevel || !categoryLevel1s || categoryLevel1s.length == 0) {
 			this.getCategoryLevel1s();
 		} else {
-			this.setData({ categoryLevel1s: categoryLevel1s});
+			this.setData({ categoryLevel1s: categoryLevel1s, selectedId: categoryLevel1s[0].id });
+			this.getChildCategorys();
 		}
 	},
 

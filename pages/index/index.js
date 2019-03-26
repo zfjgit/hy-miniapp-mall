@@ -94,6 +94,8 @@ Page({
             title: '正在加载...',
         });
 
+		var userInfo = wx.getStorageSync('userInfo');
+
         var addAdvListTime = wx.getStorageSync('addAdvListTime');
         var addNoticesTime = wx.getStorageSync('addNoticesTime');
         var addUserInfoTime = wx.getStorageSync('addUserInfoTime');
@@ -103,6 +105,7 @@ Page({
         wx.request({
             url: app.globalData.server + '/api/shop/member/wx-check-data-timeout.do',
             data: {
+				openid: userInfo ? userInfo.openid : '',
                 addAdvListTime: addAdvListTime,
                 addNoticesTime: addNoticesTime,
                 addUserInfoTime: addUserInfoTime,
@@ -111,6 +114,8 @@ Page({
             },
             success: function(res) {
                 var r = res.data;
+				wx.setStorageSync("sessionid", res.header["Set-Cookie"])
+				
                 console.log('checkDataTimeOut.data=', r);
                 if (r && r.result == 1 && r.data) {
                     page.initData(r);
@@ -225,11 +230,14 @@ Page({
             success: function(res) {
                 var r = res.data;
                 if (r && r.result == 1) {
+					console.log('notices=', r.data);
+
                     var notices = [];
                     for (var i = 0; i < r.data.length; i++) {
                         notices.push({
                             title: r.data[i].title,
-                            id: r.data[i].id
+                            id: r.data[i].id,
+							catid: r.data[i].cat_id
                         });
                     }
 

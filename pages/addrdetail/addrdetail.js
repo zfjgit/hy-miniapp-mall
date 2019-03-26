@@ -91,6 +91,10 @@ Page({
     },
 
     saveNewAddr: function() {
+		wx.showLoading({
+			title: '正在加载...',
+		});
+
         var addr = this.data.addr;
         wx.request({
             method: 'POST',
@@ -125,11 +129,18 @@ Page({
                         title: '操作失败',
                     });
                 }
-            }
+            },
+			complete: function() {
+				wx.hideLoading();
+			}
         });
     },
 
     updateAddr: function() {
+		wx.showLoading({
+			title: '正在加载...',
+		});
+		
         var addr = this.data.addr;
         wx.request({
             method: 'POST',
@@ -165,7 +176,10 @@ Page({
                         title: '操作失败',
                     });
                 }
-            }
+			},
+			complete: function () {
+				wx.hideLoading();
+			}
         });
     },
 

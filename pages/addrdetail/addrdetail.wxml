@@ -9,7 +9,7 @@
     <view class="view-addr-item">
         <view class='view-addr-item-title'>联系电话</view>
         <view class='view-addr-item-value'>
-            <input bindinput='bindTel' placeholder='请输入联系电话' value='{{addr.tel}}'></input>
+            <input bindinput='bindTel' type='number' placeholder='请输入联系电话' value='{{addr.tel}}'></input>
         </view>
     </view>
 
